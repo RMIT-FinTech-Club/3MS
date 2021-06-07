@@ -1,8 +1,9 @@
 import create, { SetState, GetState } from "zustand";
+import { supabase } from "../config/supabase-client";
 
 type AuthStore = {
 	isLoggedIn: boolean;
-	login: () => void;
+	login: ({ email, password }) => void;
 	register: () => void;
 	logout: () => void;
 };
@@ -10,7 +11,11 @@ type AuthStore = {
 const useAuthStore = create<AuthStore>(
 	(set: SetState<AuthStore>, get: GetState<AuthStore>) => ({
 		isLoggedIn: false,
-		login: () => {
+		login: ({ email, password }) => {
+			supabase.auth.signUp({
+				email,
+				password,
+			});
 			set({ isLoggedIn: true });
 		},
 		register: () => {

@@ -1,44 +1,12 @@
 import React from "react";
 import "./global-style.scss";
-import {
-	BrowserRouter as Router,
-	Route,
-	Switch,
-	Redirect,
-} from "react-router-dom";
-import Login from "./components/page/Login/Login";
-import Register from "./components/page/Register/Register";
-import Dashboard from "./components/page/Dashboard/Dashboard";
-import Network from "./components/page/Network/Network";
-import { useAuthStore } from "./core/store";
+
+import AppRouter from "./AppRouter";
 
 function App() {
-	const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
 	return (
 		<div className="App">
-			<Router>
-				<Switch>
-					<Route exact path="/">
-						{isLoggedIn ? (
-							<Redirect to="/users/:userId/dashboard" />
-						) : (
-							<Login />
-						)}
-					</Route>
-					<Route exact path="/login">
-						<Login />
-					</Route>
-					<Route path="/register">
-						<Register />
-					</Route>
-					<Route path="/users/:userId/dashboard">
-						<Dashboard />
-					</Route>
-					<Route path="/users/:userId/networks/:networkId">
-						<Network />
-					</Route>
-				</Switch>
-			</Router>
+			<AppRouter />
 		</div>
 	);
 }

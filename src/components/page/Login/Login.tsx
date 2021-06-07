@@ -2,7 +2,6 @@ import React from "react";
 import { useAuthStore } from "../../../core/store";
 import {
 	Flex,
-	Heading,
 	Input,
 	Button,
 	InputGroup,
@@ -25,6 +24,12 @@ interface Props {}
 
 const Login = (props: Props) => {
 	const login = useAuthStore((state) => state.login);
+
+	const handleLogin = () => {
+		let email = "";
+		let password = "";
+		login({ email, password });
+	};
 
 	const [showPassword, setShowPassword] = React.useState(false);
 
@@ -117,7 +122,7 @@ const Login = (props: Props) => {
 								colorScheme="twitter"
 								width="full"
 								fontSize="14"
-								onClick={login}
+								onClick={handleLogin}
 							>
 								Login
 							</Button>
