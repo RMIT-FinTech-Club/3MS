@@ -10,9 +10,7 @@ import {
 	InputLeftElement,
 	Box,
 	Link,
-	Avatar,
 	FormControl,
-	FormHelperText,
 	InputRightElement,
 } from "@chakra-ui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -59,6 +57,7 @@ const Login = (props: Props) => {
 								<InputGroup>
 									<InputLeftElement
 										pointerEvents="none"
+										fontSize="12"
 										children={
 											<FontAwesomeIcon
 												icon={faUserAlt}
@@ -80,6 +79,7 @@ const Login = (props: Props) => {
 									<InputLeftElement
 										pointerEvents="none"
 										color="gray.300"
+										fontSize="12"
 										children={
 											<FontAwesomeIcon
 												icon={faLock}
@@ -109,9 +109,6 @@ const Login = (props: Props) => {
 										</Button>
 									</InputRightElement>
 								</InputGroup>
-								{/* <FormHelperText textAlign="right">
-									<Link>Forgot password?</Link>
-								</FormHelperText> */}
 							</FormControl>
 							<Button
 								borderRadius={0}
@@ -119,6 +116,7 @@ const Login = (props: Props) => {
 								variant="solid"
 								colorScheme="twitter"
 								width="full"
+								fontSize="14"
 								onClick={login}
 							>
 								Login
@@ -127,7 +125,7 @@ const Login = (props: Props) => {
 					</form>
 				</Box>
 			</Stack>
-			<Box>
+			<Box fontSize="12">
 				Haven't register yet?{" "}
 				<Link color="twitter.500" href="#">
 					Register Now
