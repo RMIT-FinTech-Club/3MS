@@ -1,26 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./global-style.scss";
+import {
+	BrowserRouter as Router,
+	Route,
+	Switch,
+	Redirect,
+} from "react-router-dom";
+import Login from "./components/page/Login/Login";
+import Register from "./components/page/Register/Register";
+import Dashboard from "./components/page/Dashboard/Dashboard";
+import Network from "./components/page/Network/Network";
+import { useAuthStore } from "./core/store";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
+	return (
+		<div className="App">
+			<Router>
+				<Switch>
+					<Route exact path="/">
+						{isLoggedIn ? (
+							<Redirect to="/users/:userId/dashboard" />
+						) : (
+							<Login />
+						)}
+					</Route>
+					<Route exact path="/login">
+						<Login />
+					</Route>
+					<Route path="/register">
+						<Register />
+					</Route>
+					<Route path="/users/:userId/dashboard">
+						<Dashboard />
+					</Route>
+					<Route path="/users/:userId/networks/:networkId">
+						<Network />
+					</Route>
+				</Switch>
+			</Router>
+		</div>
+	);
 }
 
 export default App;
