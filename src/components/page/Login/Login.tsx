@@ -22,6 +22,7 @@ import {
 import { supabase } from "../../../core/config/supabase-client";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ReactLoading from "react-loading";
 
 interface Props {}
 
@@ -37,6 +38,7 @@ const Login = (props: Props) => {
 
 	const handleLogin = async (e) => {
 		e.preventDefault();
+		setUiLoading((load) => (load = true));
 		let email = input?.email;
 		let password = input?.password;
 		let res = await supabase.auth.signIn({
@@ -48,14 +50,14 @@ const Login = (props: Props) => {
 				case "You must provide either an email or a third-party provider.":
 					setInputError("You must fill in the required fields first!");
 					break;
-
 				default:
 					setInputError(res.error.message);
 					break;
 			}
+			setUiLoading((load) => (load = false));
 			return;
 		}
-		toast("✔ Successfully log in!", {
+		toast.success("✔ Successfully log in!", {
 			position: "bottom-center",
 			autoClose: 5000,
 			hideProgressBar: false,
@@ -65,6 +67,7 @@ const Login = (props: Props) => {
 			progress: undefined,
 		});
 		setInputError("");
+		setUiLoading((load) => (load = false));
 		loginStateChanged();
 	};
 
@@ -95,7 +98,7 @@ const Login = (props: Props) => {
 							backgroundColor="whiteAlpha.900"
 							boxShadow="md"
 						>
-							<FormControl>
+							<FormControl isRequired>
 								<InputGroup>
 									<InputLeftElement
 										pointerEvents="none"
@@ -127,7 +130,7 @@ const Login = (props: Props) => {
 									/>
 								</InputGroup>
 							</FormControl>
-							<FormControl>
+							<FormControl isRequired>
 								<InputGroup>
 									<InputLeftElement
 										pointerEvents="none"
@@ -189,7 +192,11 @@ const Login = (props: Props) => {
 								fontSize="14"
 								onClick={handleLogin}
 							>
-								Login
+								{uiLoading ? (
+									<ReactLoading type={"bubbles"} color="#fff" />
+								) : (
+									"Login"
+								)}
 							</Button>
 						</Stack>
 					</form>

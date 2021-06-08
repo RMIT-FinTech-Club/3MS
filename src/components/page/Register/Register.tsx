@@ -23,6 +23,7 @@ import {
 import { supabase } from "../../../core/config/supabase-client";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ReactLoading from "react-loading";
 
 interface Props {}
 
@@ -39,11 +40,13 @@ const Register = (props: Props) => {
 
 	const handleRegister = async (e) => {
 		e.preventDefault();
+		setUiLoading((load) => (load = true));
 		let email = input?.email;
 		let password = input?.password;
 		let confirmPassword = input?.confirmPassword;
 		if (password !== confirmPassword) {
 			setInputError("Password does not match. Try again.");
+			setUiLoading((load) => (load = false));
 			return;
 		}
 		let res = await supabase.auth.signUp({
@@ -59,9 +62,10 @@ const Register = (props: Props) => {
 					setInputError(res.error.message);
 					break;
 			}
+			setUiLoading((load) => (load = false));
 			return;
 		}
-		toast("✉ Verification link sent to your email!", {
+		toast.success("✉ Verification link sent to your email!", {
 			position: toast.POSITION.BOTTOM_CENTER,
 			autoClose: 5000,
 			hideProgressBar: false,
@@ -72,6 +76,7 @@ const Register = (props: Props) => {
 		});
 		console.log(res);
 		setInputError("");
+		setUiLoading((load) => (load = false));
 		registerStateChanged();
 	};
 
@@ -102,7 +107,7 @@ const Register = (props: Props) => {
 							backgroundColor="whiteAlpha.900"
 							boxShadow="md"
 						>
-							<FormControl>
+							<FormControl isRequired>
 								<InputGroup>
 									<InputLeftElement
 										pointerEvents="none"
@@ -134,7 +139,7 @@ const Register = (props: Props) => {
 									/>
 								</InputGroup>
 							</FormControl>
-							<FormControl>
+							<FormControl isRequired>
 								<InputGroup>
 									<InputLeftElement
 										pointerEvents="none"
@@ -181,7 +186,7 @@ const Register = (props: Props) => {
 									</InputRightElement>
 								</InputGroup>
 							</FormControl>
-							<FormControl>
+							<FormControl isRequired>
 								<InputGroup>
 									<InputLeftElement
 										pointerEvents="none"
@@ -228,7 +233,11 @@ const Register = (props: Props) => {
 								fontSize="14"
 								onClick={handleRegister}
 							>
-								Register
+								{uiLoading ? (
+									<ReactLoading type={"bubbles"} color="#fff" />
+								) : (
+									"Register"
+								)}
 							</Button>
 						</Stack>
 					</form>
