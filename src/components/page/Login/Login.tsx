@@ -95,14 +95,16 @@ const Login = (props: Props) => {
 				alignItems="center"
 			>
 				<Stack align={"center"} mb="5">
-					<Heading fontSize={"4xl"}>Sign in to your account</Heading>
+					<Heading fontSize={{ base: "25px", lg: "40px" }}>
+						Sign in to your account
+					</Heading>
 					<Text fontSize={"md"} color={"gray.600"}>
 						to enjoy all of our cool <Link color={"blue.400"}>features</Link> ✌️
 					</Text>
 				</Stack>
 				<Box
 					p="4"
-					minW={{ base: "90%", sm: "400px" }}
+					minW={{ base: "90%", sm: "430px" }}
 					bg={useColorModeValue("white", "gray.700")}
 					boxShadow={"lg"}
 					rounded="lg"

@@ -9,6 +9,7 @@ import Login from "./components/page/Login/Login";
 import Register from "./components/page/Register/Register";
 import Dashboard from "./components/page/Dashboard/Dashboard";
 import Network from "./components/page/Network/Network";
+import Landing from "./components/page/Landing/Landing";
 import { useAuthStore } from "./core/store";
 
 interface Props {}
@@ -23,7 +24,7 @@ const AppRouter = (props: Props) => {
 					{isLoggedIn ? (
 						<Redirect to={`/users/${authUser?.id}/dashboard`} />
 					) : (
-						<Login />
+						<Landing />
 					)}
 				</Route>
 				<Route exact path="/login">
