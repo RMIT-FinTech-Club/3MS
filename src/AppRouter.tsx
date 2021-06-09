@@ -11,6 +11,7 @@ import Dashboard from "./components/page/Dashboard/Dashboard";
 import Network from "./components/page/Network/Network";
 import Landing from "./components/page/Landing/Landing";
 import { useAuthStore } from "./core/store";
+import Navbar from "./components/Navbar";
 
 interface Props {}
 
@@ -19,6 +20,7 @@ const AppRouter = (props: Props) => {
 	const authUser = useAuthStore((state) => state.currentUser);
 	return (
 		<Router>
+			<Navbar />
 			<Switch>
 				<Route exact path="/">
 					{isLoggedIn ? (

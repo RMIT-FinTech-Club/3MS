@@ -22,11 +22,18 @@ import {
 	ChevronRightIcon,
 } from "@chakra-ui/icons";
 import { useAuthStore } from "../core/store";
+import { useHistory } from "react-router-dom";
 
 function Navbar() {
 	const { isOpen, onToggle } = useDisclosure();
+	const history = useHistory();
 	const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
 	const authUser = useAuthStore((state) => state.currentUser);
+	const unauthenticated = useAuthStore((state) => state.unauthenticated);
+	const handleLogout = () => {
+		unauthenticated();
+		history.push("/");
+	};
 
 	return (
 		<Box>
@@ -104,7 +111,23 @@ function Navbar() {
 						</Button>
 					</Stack>
 				) : (
-					<>{authUser?.email}</>
+					<>
+						<Text mr="5">{authUser?.email}</Text>
+						<Button
+							as={"a"}
+							display={{ base: "none", md: "inline-flex" }}
+							fontSize={"sm"}
+							fontWeight={600}
+							color={"white"}
+							bg={"red.400"}
+							onClick={handleLogout}
+							_hover={{
+								bg: "red.300",
+							}}
+						>
+							Log out
+						</Button>
+					</>
 				)}
 			</Flex>
 
