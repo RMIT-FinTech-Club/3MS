@@ -15,11 +15,16 @@ interface Props {}
 
 const AppRouter = (props: Props) => {
 	const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
+	const authUser = useAuthStore((state) => state.currentUser);
 	return (
 		<Router>
 			<Switch>
 				<Route exact path="/">
-					{isLoggedIn ? <Redirect to="/users/:userId/dashboard" /> : <Login />}
+					{isLoggedIn ? (
+						<Redirect to={`/users/${authUser?.id}/dashboard`} />
+					) : (
+						<Login />
+					)}
 				</Route>
 				<Route exact path="/login">
 					<Login />

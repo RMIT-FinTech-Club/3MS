@@ -1,5 +1,4 @@
 import React from "react";
-import { useAuthStore } from "../../../core/store";
 import {
 	Flex,
 	Input,
@@ -36,7 +35,6 @@ const Register = (props: Props) => {
 			password?: string | undefined;
 			confirmPassword?: string | undefined;
 		}>();
-	const registerStateChanged = useAuthStore((state) => state.register);
 
 	const handleRegister = async (e) => {
 		e.preventDefault();
@@ -77,7 +75,6 @@ const Register = (props: Props) => {
 		console.log(res);
 		setInputError("");
 		setUiLoading((load) => (load = false));
-		registerStateChanged();
 	};
 
 	const [showPassword, setShowPassword] = React.useState(false);

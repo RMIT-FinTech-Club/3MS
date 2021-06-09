@@ -20,9 +20,9 @@ import {
 	faEyeSlash,
 } from "@fortawesome/free-solid-svg-icons";
 import { supabase } from "../../../core/config/supabase-client";
-import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ReactLoading from "react-loading";
+import { User } from "@supabase/gotrue-js";
 
 interface Props {}
 
@@ -57,18 +57,9 @@ const Login = (props: Props) => {
 			setUiLoading((load) => (load = false));
 			return;
 		}
-		toast.success("✔ Successfully log in!", {
-			position: "bottom-center",
-			autoClose: 5000,
-			hideProgressBar: false,
-			closeOnClick: true,
-			pauseOnHover: true,
-			draggable: true,
-			progress: undefined,
-		});
 		setInputError("");
 		setUiLoading((load) => (load = false));
-		loginStateChanged();
+		loginStateChanged(res.user as User);
 	};
 
 	const [showPassword, setShowPassword] = React.useState(false);
@@ -208,17 +199,6 @@ const Login = (props: Props) => {
 					Register Now
 				</Link>
 			</Box>
-			<ToastContainer
-				position="bottom-center"
-				autoClose={5000}
-				hideProgressBar={false}
-				newestOnTop={false}
-				closeOnClick
-				rtl={false}
-				pauseOnFocusLoss
-				draggable
-				pauseOnHover
-			/>
 		</Flex>
 	);
 };

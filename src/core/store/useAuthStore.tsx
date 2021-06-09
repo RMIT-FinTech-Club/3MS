@@ -1,8 +1,10 @@
+import { User } from "@supabase/gotrue-js";
 import create, { SetState, GetState } from "zustand";
 
 type AuthStore = {
 	isLoggedIn: boolean;
-	login: () => void;
+	currentUser: User | null;
+	login: (user: User) => void;
 	register: () => void;
 	logout: () => void;
 };
@@ -10,8 +12,9 @@ type AuthStore = {
 const useAuthStore = create<AuthStore>(
 	(set: SetState<AuthStore>, get: GetState<AuthStore>) => ({
 		isLoggedIn: false,
-		login: () => {
-			set({ isLoggedIn: true });
+		currentUser: null,
+		login: (user) => {
+			set({ isLoggedIn: true, currentUser: user });
 		},
 		register: () => {
 			set({ isLoggedIn: true });
