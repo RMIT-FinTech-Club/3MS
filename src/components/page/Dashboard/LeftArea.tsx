@@ -5,28 +5,26 @@ import React, { Fragment } from "react";
 import {
 	FaChalkboard,
 	FaChartBar,
-	FaDashcube,
 	FaNetworkWired,
 	FaUserFriends,
 } from "react-icons/fa";
+import useDashboardStore from "../../../core/store/useDashboardStore";
+import { TABS } from "./utils/leftTabs";
 
 interface Props {
 	onToggle: any;
 	isToggled: boolean;
 }
 
-const TABS = {
-	DASHBOARD: "DASHBOARD",
-	NETWORK: "NETWORK",
-	STATISTICS: "STATISTICS",
-	CONTACT: "CONTACT",
-};
-
 const LeftArea = (props: Props) => {
+	const dashboardStore = useDashboardStore();
+	const [tabSelected, setTabSelected] = React.useState<string>(
+		dashboardStore.tab
+	);
 	const handleSwitchTab = (tabName: string) => {
 		setTabSelected((tab) => (tab = tabName));
+		dashboardStore.switchTab(tabName);
 	};
-	const [tabSelected, setTabSelected] = React.useState<string>(TABS.DASHBOARD);
 	return (
 		<Stack>
 			<IconButton
@@ -42,7 +40,7 @@ const LeftArea = (props: Props) => {
 					<Fragment>
 						<FaChalkboard />
 						{props.isToggled ? (
-							<Text ml="3" fontSize="14" fontWeight="normal" color="gray.500">
+							<Text ml="3" fontSize="14" fontWeight="normal">
 								Dashboard
 							</Text>
 						) : (
@@ -59,7 +57,7 @@ const LeftArea = (props: Props) => {
 					<Fragment>
 						<FaNetworkWired />
 						{props.isToggled ? (
-							<Text ml="3" fontSize="14" fontWeight="normal" color="gray.500">
+							<Text ml="3" fontSize="14" fontWeight="normal">
 								Network
 							</Text>
 						) : (
@@ -76,7 +74,7 @@ const LeftArea = (props: Props) => {
 					<Fragment>
 						<FaChartBar />
 						{props.isToggled ? (
-							<Text ml="3" fontSize="14" fontWeight="normal" color="gray.500">
+							<Text ml="3" fontSize="14" fontWeight="normal">
 								Statistics
 							</Text>
 						) : (
@@ -93,7 +91,7 @@ const LeftArea = (props: Props) => {
 					<Fragment>
 						<FaUserFriends />
 						{props.isToggled ? (
-							<Text ml="3" fontSize="14" fontWeight="normal" color="gray.500">
+							<Text ml="3" fontSize="14" fontWeight="normal">
 								Contact
 							</Text>
 						) : (

@@ -14,8 +14,10 @@ import Testimonials from "./Testimonials";
 import Footer from "./Footer";
 import { Divider } from "@chakra-ui/react";
 import Pricing from "./Pricing";
+import { useHistory } from "react-router";
 
 export default function Landing() {
+	const history = useHistory();
 	return (
 		<>
 			<Container maxW={"3xl"}>
@@ -58,6 +60,7 @@ export default function Landing() {
 							_hover={{
 								bg: "twitter.500",
 							}}
+							onClick={() => history.push("/login")}
 						>
 							Get Started
 						</Button>
