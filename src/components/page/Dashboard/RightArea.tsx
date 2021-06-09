@@ -1,5 +1,9 @@
 import React from "react";
 import useDashboardStore from "../../../core/store/useDashboardStore";
+import { ContactRight } from "./tabs/Contact";
+import { DashboardRight } from "./tabs/Dashboard";
+import { NetworkRight } from "./tabs/Network";
+import { StatisticsRight } from "./tabs/Statistics";
 import { TABS } from "./utils/leftTabs";
 
 interface Props {}
@@ -8,13 +12,13 @@ const RightArea = (props: Props) => {
 	let route = useDashboardStore((state) => state.tab);
 	switch (route) {
 		case TABS.DASHBOARD:
-			return <>Dashboard</>;
+			return <DashboardRight />;
 		case TABS.NETWORK:
-			return <>Network</>;
+			return <NetworkRight />;
 		case TABS.CONTACT:
-			return <>Contact</>;
+			return <ContactRight />;
 		case TABS.STATISTICS:
-			return <>Statistics</>;
+			return <StatisticsRight />;
 		default:
 			return <></>;
 	}

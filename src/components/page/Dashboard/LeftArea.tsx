@@ -1,6 +1,6 @@
 import { IconButton } from "@chakra-ui/button";
 import { HamburgerIcon } from "@chakra-ui/icons";
-import { Stack, Text } from "@chakra-ui/layout";
+import { Divider, Stack, Text } from "@chakra-ui/layout";
 import React, { Fragment } from "react";
 import {
 	FaChalkboard,
@@ -29,10 +29,11 @@ const LeftArea = (props: Props) => {
 		<Stack>
 			<IconButton
 				aria-label="Search database"
-				bg="gray.100"
+				bg="transparent"
 				icon={<HamburgerIcon />}
 				onClick={props.onToggle}
 			/>
+			<Divider />
 			<IconButton
 				aria-label="Search database"
 				bg={tabSelected == TABS.DASHBOARD ? "twitter.100" : "transparent"}

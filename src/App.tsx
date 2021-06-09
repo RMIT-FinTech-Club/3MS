@@ -10,7 +10,6 @@ function App() {
 	authenticated();
 	return (
 		<div className="App">
-			<Navbar />
 			<AppRouter />
 		</div>
 	);

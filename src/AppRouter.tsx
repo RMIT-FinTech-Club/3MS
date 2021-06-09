@@ -7,8 +7,7 @@ import {
 } from "react-router-dom";
 import Login from "./components/page/Login/Login";
 import Register from "./components/page/Register/Register";
-import Dashboard from "./components/page/Dashboard/Dashboard";
-import Network from "./components/page/Network/Network";
+import Dashboard from "./components/page/Dashboard/Layout";
 import Landing from "./components/page/Landing/Landing";
 import { useAuthStore } from "./core/store";
 import Navbar from "./components/Navbar";
@@ -37,9 +36,6 @@ const AppRouter = (props: Props) => {
 				</Route>
 				<Route path="/users/:userId/dashboard">
 					<Dashboard />
-				</Route>
-				<Route path="/users/:userId/networks/:networkId">
-					<Network />
 				</Route>
 			</Switch>
 		</Router>
