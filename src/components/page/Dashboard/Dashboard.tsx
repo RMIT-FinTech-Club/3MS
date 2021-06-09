@@ -4,13 +4,16 @@ import { useHistory } from "react-router-dom";
 import LeftArea from "./LeftArea";
 import CenterArea from "./CenterArea";
 import RightArea from "./RightArea";
-import { Grid, GridItem } from "@chakra-ui/layout";
+import { Grid, GridItem, Stack } from "@chakra-ui/layout";
 import { useDisclosure } from "@chakra-ui/hooks";
+import { IconButton } from "@chakra-ui/button";
+import { HamburgerIcon } from "@chakra-ui/icons";
+import { MenuIcon } from "@chakra-ui/menu";
 
 interface Props {}
 
-const OPEN_OFFSET = 2;
-const RATIO_TOTAL = 22;
+const OPEN_OFFSET = 1;
+const RATIO_TOTAL = 20;
 const RATIO_LEFT = 1;
 const RATIO_LEFT_OPEN = RATIO_LEFT + OPEN_OFFSET;
 const RATIO_RIGHT = 5;
@@ -18,7 +21,6 @@ const RATIO_CENTER = RATIO_TOTAL - RATIO_LEFT - RATIO_RIGHT;
 const RATIO_CENTER_COLLAPSE = RATIO_CENTER - OPEN_OFFSET;
 
 const Dashboard = (props: Props) => {
-	const history = useHistory();
 	const { isOpen, onToggle } = useDisclosure();
 	return (
 		<Grid
@@ -30,30 +32,16 @@ const Dashboard = (props: Props) => {
 			gap={1.5}
 		>
 			{/* Left sidebar */}
-			{isOpen ? (
-				<GridItem
-					rowSpan={2}
-					borderRadius="5"
-					colSpan={RATIO_LEFT_OPEN}
-					bg="white"
-					mt="60px"
-				>
-					<button onClick={onToggle}>Open</button>
-					<LeftArea />
-				</GridItem>
-			) : (
-				<GridItem
-					rowSpan={2}
-					colSpan={RATIO_LEFT}
-					borderRadius="5"
-					bg="white"
-					mt="60px"
-				>
-					<button onClick={onToggle}>Open</button>
-					<LeftArea />
-				</GridItem>
-			)}
-
+			<GridItem
+				rowSpan={2}
+				colSpan={isOpen ? RATIO_LEFT_OPEN : RATIO_LEFT}
+				borderRadius="5"
+				bg="white"
+				mt="60px"
+				p="2"
+			>
+				<LeftArea onToggle={onToggle} isToggled={isOpen} />
+			</GridItem>
 			<GridItem
 				colSpan={isOpen ? RATIO_CENTER_COLLAPSE : RATIO_CENTER}
 				rowSpan={2}
