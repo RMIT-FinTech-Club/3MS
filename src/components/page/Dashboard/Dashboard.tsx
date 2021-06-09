@@ -1,6 +1,9 @@
 import React from "react";
 import { useAuthStore } from "../../../core/store";
 import { useHistory } from "react-router-dom";
+import LeftArea from "./LeftArea";
+import CenterArea from "./CenterArea";
+import RightArea from "./RightArea";
 
 interface Props {}
 
@@ -13,7 +16,13 @@ const Dashboard = (props: Props) => {
 	};
 	return (
 		<div>
-			Dashboard
+			{/* Left sidebar */}
+			<LeftArea />
+			{/* Center area */}
+			<CenterArea />
+			{/* Right sidebar */}
+			<RightArea />
+			<br></br>
 			<button onClick={handleLogout}>Logout</button>
 		</div>
 	);
