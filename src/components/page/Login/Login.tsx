@@ -29,10 +29,12 @@ import { supabase } from "../../../core/config/supabase-client";
 import "react-toastify/dist/ReactToastify.css";
 import ReactLoading from "react-loading";
 import { Provider, User } from "@supabase/gotrue-js";
+import { useHistory } from "react-router";
 
 interface Props {}
 
 const Login = (props: Props) => {
+	const history = useHistory();
 	const [inputError, setInputError] = React.useState<string>();
 	const [uiLoading, setUiLoading] = React.useState<boolean>();
 	const [input, setInput] =
@@ -40,7 +42,7 @@ const Login = (props: Props) => {
 			email?: string | undefined;
 			password?: string | undefined;
 		}>();
-	const loginStateChanged = useAuthStore((state) => state.login);
+	const loginStateChanged = useAuthStore((state) => state.authenticated);
 
 	const handleLogin = async (e) => {
 		e.preventDefault();
@@ -66,6 +68,7 @@ const Login = (props: Props) => {
 		setInputError("");
 		setUiLoading((load) => (load = false));
 		loginStateChanged(res.user as User);
+		history.push(`/users/${res.user?.id}/dashboard`);
 	};
 
 	const handleSocialAuthenticate = async (name: Provider | undefined) => {

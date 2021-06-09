@@ -9,7 +9,7 @@ interface Props {}
 
 const Dashboard = (props: Props) => {
 	const history = useHistory();
-	const logout = useAuthStore((state) => state.logout);
+	const logout = useAuthStore((state) => state.unauthenticated);
 	const handleLogout = () => {
 		logout();
 		history.push("/");

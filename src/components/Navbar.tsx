@@ -21,9 +21,12 @@ import {
 	ChevronDownIcon,
 	ChevronRightIcon,
 } from "@chakra-ui/icons";
+import { useAuthStore } from "../core/store";
 
 function Navbar() {
 	const { isOpen, onToggle } = useDisclosure();
+	const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
+	const authUser = useAuthStore((state) => state.currentUser);
 
 	return (
 		<Box>
@@ -69,37 +72,40 @@ function Navbar() {
 						<DesktopNav />
 					</Flex>
 				</Flex>
-
-				<Stack
-					flex={{ base: 1, md: 0 }}
-					justify={"flex-end"}
-					direction={"row"}
-					spacing={6}
-				>
-					<Button
-						as={"a"}
-						fontSize={"sm"}
-						fontWeight={400}
-						variant={"link"}
-						href={"/login"}
+				{!isLoggedIn ? (
+					<Stack
+						flex={{ base: 1, md: 0 }}
+						justify={"flex-end"}
+						direction={"row"}
+						spacing={6}
 					>
-						Sign In
-					</Button>
-					<Button
-						as={"a"}
-						display={{ base: "none", md: "inline-flex" }}
-						fontSize={"sm"}
-						fontWeight={600}
-						color={"white"}
-						bg={"twitter.400"}
-						href={"/register"}
-						_hover={{
-							bg: "twitter.300",
-						}}
-					>
-						Sign Up
-					</Button>
-				</Stack>
+						<Button
+							as={"a"}
+							fontSize={"sm"}
+							fontWeight={400}
+							variant={"link"}
+							href={"/login"}
+						>
+							Sign In
+						</Button>
+						<Button
+							as={"a"}
+							display={{ base: "none", md: "inline-flex" }}
+							fontSize={"sm"}
+							fontWeight={600}
+							color={"white"}
+							bg={"twitter.400"}
+							href={"/register"}
+							_hover={{
+								bg: "twitter.300",
+							}}
+						>
+							Sign Up
+						</Button>
+					</Stack>
+				) : (
+					<>{authUser?.email}</>
+				)}
 			</Flex>
 
 			<Collapse in={isOpen} animateOpacity>
