@@ -68,7 +68,7 @@ const Login = (props: Props) => {
 		setInputError("");
 		setUiLoading((load) => (load = false));
 		loginStateChanged(res.user as User);
-		history.push(`/users/${res.user?.id}/dashboard`);
+		history.push(`/dashboard`);
 	};
 
 	const handleSocialAuthenticate = async (name: Provider | undefined) => {

@@ -2,6 +2,7 @@ import React from "react";
 import useDashboardStore from "../../../core/store/useDashboardStore";
 import { ContactCenter } from "./tabs/Contact/Contact";
 import { DashboardCenter } from "./tabs/Dashboard/Dashboard";
+import { IntegrationsCenter } from "./tabs/Integrations/Integrations";
 import { NetworkCenter } from "./tabs/Network/Network";
 import { StatisticsCenter } from "./tabs/Statistics/Statistics";
 import { TABS } from "./utils/leftTabs";
@@ -19,6 +20,8 @@ const CenterArea = (props: Props) => {
 			return <ContactCenter />;
 		case TABS.STATISTICS:
 			return <StatisticsCenter />;
+		case TABS.INTEGRATIONS:
+			return <IntegrationsCenter />;
 		default:
 			return <></>;
 	}

@@ -4,19 +4,37 @@ import CenterArea from "./CenterArea";
 import RightArea from "./RightArea";
 import { Grid, GridItem, Stack } from "@chakra-ui/layout";
 import { useDisclosure } from "@chakra-ui/hooks";
+import useDashboardStore from "../../../core/store/useDashboardStore";
+import { TABS } from "./utils/leftTabs";
 
 interface Props {}
 
-const OPEN_OFFSET = 1;
-const RATIO_TOTAL = 20;
-const RATIO_LEFT = 1;
-const RATIO_LEFT_OPEN = RATIO_LEFT + OPEN_OFFSET;
-const RATIO_RIGHT = 5;
-const RATIO_CENTER = RATIO_TOTAL - RATIO_LEFT - RATIO_RIGHT;
-const RATIO_CENTER_COLLAPSE = RATIO_CENTER - OPEN_OFFSET;
-
 const DashboardLayout = (props: Props) => {
+	let route = useDashboardStore((state) => state.tab);
 	const { isOpen, onToggle } = useDisclosure();
+	let OPEN_OFFSET = 1;
+	let RATIO_TOTAL = 20;
+	let RATIO_LEFT = 1;
+	let RATIO_RIGHT = 5;
+	switch (route) {
+		case TABS.DASHBOARD:
+			break;
+		case TABS.NETWORK:
+			RATIO_RIGHT = 0;
+			break;
+		case TABS.CONTACT:
+			break;
+		case TABS.STATISTICS:
+			break;
+		case TABS.INTEGRATIONS:
+			RATIO_RIGHT = 0;
+			break;
+		default:
+			return <></>;
+	}
+	let RATIO_LEFT_OPEN = RATIO_LEFT + OPEN_OFFSET;
+	let RATIO_CENTER = RATIO_TOTAL - RATIO_LEFT - RATIO_RIGHT;
+	let RATIO_CENTER_COLLAPSE = RATIO_CENTER - OPEN_OFFSET;
 	return (
 		<Grid
 			h="100vh"
@@ -37,6 +55,19 @@ const DashboardLayout = (props: Props) => {
 				<LeftArea onToggle={onToggle} isToggled={isOpen} />
 			</GridItem>
 			<GridItem
+				overflow="scroll"
+				css={{
+					"&::-webkit-scrollbar": {
+						width: "4px",
+					},
+					"&::-webkit-scrollbar-track": {
+						width: "1px",
+					},
+					"&::-webkit-scrollbar-thumb": {
+						background: "lightgray",
+						borderRadius: "24px",
+					},
+				}}
 				colSpan={isOpen ? RATIO_CENTER_COLLAPSE : RATIO_CENTER}
 				rowSpan={2}
 				bg="white"
@@ -45,10 +76,12 @@ const DashboardLayout = (props: Props) => {
 				{/* Center area */}
 				<CenterArea />
 			</GridItem>
-			<GridItem colSpan={RATIO_RIGHT} rowSpan={2} bg="white" mt="60px">
-				{/* Right sidebar */}
-				<RightArea />
-			</GridItem>
+			{RATIO_RIGHT != 0 && (
+				<GridItem colSpan={RATIO_RIGHT} rowSpan={2} bg="white" mt="60px">
+					{/* Right sidebar */}
+					<RightArea />
+				</GridItem>
+			)}
 		</Grid>
 	);
 };

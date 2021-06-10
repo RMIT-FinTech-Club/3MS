@@ -3,7 +3,7 @@ import { Box, Divider, Text } from "@chakra-ui/layout";
 
 const DashboardCenter: React.FC = () => {
 	return (
-		<Box paddingX="10" paddingY="5">
+		<Box paddingX="10" paddingY="3">
 			<Text mb="2" fontSize="25px">
 				Dashboard
 			</Text>

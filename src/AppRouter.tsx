@@ -22,11 +22,7 @@ const AppRouter = (props: Props) => {
 			<Navbar />
 			<Switch>
 				<Route exact path="/">
-					{isLoggedIn ? (
-						<Redirect to={`/users/${authUser?.id}/dashboard`} />
-					) : (
-						<Landing />
-					)}
+					{isLoggedIn ? <Redirect to={`/dashboard`} /> : <Landing />}
 				</Route>
 				<Route exact path="/login">
 					<Login />
@@ -34,7 +30,7 @@ const AppRouter = (props: Props) => {
 				<Route path="/register">
 					<Register />
 				</Route>
-				<Route path="/users/:userId/dashboard">
+				<Route path="/dashboard">
 					<Dashboard />
 				</Route>
 			</Switch>

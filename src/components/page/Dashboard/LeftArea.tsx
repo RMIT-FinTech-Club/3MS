@@ -6,6 +6,7 @@ import {
 	FaChalkboard,
 	FaChartBar,
 	FaNetworkWired,
+	FaToolbox,
 	FaUserFriends,
 } from "react-icons/fa";
 import useDashboardStore from "../../../core/store/useDashboardStore";
@@ -93,7 +94,7 @@ const LeftArea = (props: Props) => {
 						<FaUserFriends />
 						{props.isToggled ? (
 							<Text ml="3" fontSize="14" fontWeight="normal">
-								Contact
+								Node
 							</Text>
 						) : (
 							<></>
@@ -101,6 +102,23 @@ const LeftArea = (props: Props) => {
 					</Fragment>
 				}
 				onClick={() => handleSwitchTab(TABS.CONTACT)}
+			/>
+			<IconButton
+				aria-label="Search database"
+				bg={tabSelected == TABS.INTEGRATIONS ? "twitter.100" : "transparent"}
+				icon={
+					<Fragment>
+						<FaToolbox />
+						{props.isToggled ? (
+							<Text ml="3" fontSize="14" fontWeight="normal">
+								Integrations
+							</Text>
+						) : (
+							<></>
+						)}
+					</Fragment>
+				}
+				onClick={() => handleSwitchTab(TABS.INTEGRATIONS)}
 			/>
 		</Stack>
 	);
