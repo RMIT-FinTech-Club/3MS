@@ -11,6 +11,7 @@ import Dashboard from "./components/page/Dashboard/Layout";
 import Landing from "./components/page/Landing/Landing";
 import { useAuthStore } from "./core/store";
 import Navbar from "./components/Navbar";
+import PreRenderer from "./components/PreRenderer";
 
 interface Props {}
 
@@ -31,7 +32,14 @@ const AppRouter = (props: Props) => {
 					<Register />
 				</Route>
 				<Route path="/dashboard">
-					<Dashboard />
+					<PreRenderer
+						fetchedData={{
+							hasIntegrations: true,
+						}}
+						component={() => {
+							return <Dashboard />;
+						}}
+					></PreRenderer>
 				</Route>
 			</Switch>
 		</Router>

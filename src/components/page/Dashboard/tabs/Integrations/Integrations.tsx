@@ -1,26 +1,17 @@
 import React from "react";
-import { Box, Center, Divider, SimpleGrid, Text } from "@chakra-ui/layout";
+import { Box, Divider, SimpleGrid, Text } from "@chakra-ui/layout";
 import IntegrationsCard from "./IntegrationsCard";
 import { getIntegrations } from "../../../../../core/api/integrations";
 import { useQuery, useQueryClient } from "react-query";
-import { Skeleton } from "@chakra-ui/skeleton";
-import { Spinner } from "@chakra-ui/spinner";
+import useGlobalStore from "../../../../../core/store/useGlobalStore";
 
 const IntegrationsCenter: React.FC = () => {
-	const queryClient = useQueryClient();
-
-	const query = useQuery(
-		"integrations",
-		async () => {
-			return await getIntegrations();
-		},
-
-		{
-			staleTime: 10000,
-		}
-	);
-
-	console.log(query);
+	let integrations = useGlobalStore((state) => state.integrations);
+	const integrationsComponent = integrations?.map((integration: any) => (
+		<Box>
+			<IntegrationsCard {...integration} key={integration.name} />
+		</Box>
+	));
 
 	return (
 		<Box paddingX="10" paddingY="3">
@@ -28,33 +19,17 @@ const IntegrationsCenter: React.FC = () => {
 				Integrations
 			</Text>
 			<Divider mb="5" />
-			{query.isLoading || query.isFetching ? (
-				<Center h="2xl">
-					<Spinner
-						thickness="4px"
-						speed="0.65s"
-						emptyColor="gray.200"
-						color="twitter.500"
-						size="xl"
-					/>
-				</Center>
-			) : (
-				<SimpleGrid
-					columns={{
-						xl: 4,
-						lg: 3,
-						md: 2,
-						sm: 1,
-					}}
-					spacing={2}
-				>
-					{query.data?.map((integration: any) => (
-						<Box>
-							<IntegrationsCard {...integration} key={integration.name} />
-						</Box>
-					))}
-				</SimpleGrid>
-			)}
+			<SimpleGrid
+				columns={{
+					xl: 4,
+					lg: 3,
+					md: 2,
+					sm: 1,
+				}}
+				spacing={2}
+			>
+				{integrationsComponent}
+			</SimpleGrid>
 		</Box>
 	);
 };

@@ -23,15 +23,19 @@ import {
 } from "@chakra-ui/icons";
 import { useAuthStore } from "../core/store";
 import { useHistory } from "react-router-dom";
+import useDashboardStore from "../core/store/useDashboardStore";
+import { TABS } from "./page/Dashboard/utils/leftTabs";
 
 function Navbar() {
 	const { isOpen, onToggle } = useDisclosure();
 	const history = useHistory();
+	const switchTab = useDashboardStore((state) => state.switchTab);
 	const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
 	const authUser = useAuthStore((state) => state.currentUser);
 	const unauthenticated = useAuthStore((state) => state.unauthenticated);
 	const handleLogout = () => {
 		unauthenticated();
+		switchTab(TABS.DASHBOARD);
 		history.push("/");
 	};
 

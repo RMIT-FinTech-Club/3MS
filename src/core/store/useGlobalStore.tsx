@@ -3,14 +3,16 @@ import { persist } from "zustand/middleware";
 
 type GlobalStore = {
 	integrations: any;
-	setIntegrations: () => void;
+	setIntegrations: (data: any) => void;
 };
 
 const useGlobalStore = create<GlobalStore>(
 	persist(
 		(set: SetState<GlobalStore>, get: GetState<GlobalStore>) => ({
 			integrations: [],
-			setIntegrations: () => {},
+			setIntegrations: (data) => {
+				set({ integrations: data });
+			},
 		}),
 		{
 			name: "global-storage", // unique name
@@ -18,3 +20,5 @@ const useGlobalStore = create<GlobalStore>(
 		}
 	)
 );
+
+export default useGlobalStore;
