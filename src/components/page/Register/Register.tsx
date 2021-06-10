@@ -256,7 +256,7 @@ const Register = (props: Props) => {
 			</Stack>
 			<Box fontSize="14">
 				Already have an account?{" "}
-				<Link color="twitter.500" href="/">
+				<Link color="twitter.500" href="/login">
 					Sign in
 				</Link>
 			</Box>

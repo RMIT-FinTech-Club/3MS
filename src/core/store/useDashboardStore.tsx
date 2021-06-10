@@ -1,4 +1,3 @@
-import { User } from "@supabase/gotrue-js";
 import create, { SetState, GetState } from "zustand";
 import { persist } from "zustand/middleware";
 import { TABS } from "../../components/page/Dashboard/utils/leftTabs";
@@ -14,7 +13,7 @@ const useDashboardStore = create<DashboardStore>(
 			tab: TABS.DASHBOARD,
 			switchTab: (tabName) => {
 				let tab = get().tab;
-				if (tabName != tab) {
+				if (tabName !== tab) {
 					set({ tab: tabName });
 				}
 			},
