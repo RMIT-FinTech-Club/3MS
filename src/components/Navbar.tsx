@@ -43,7 +43,7 @@ function Navbar() {
 				minH={"60px"}
 				w="full"
 				py={{ base: 2 }}
-				px={{ base: 4 }}
+				px={{ base: 6 }}
 				borderBottom={1}
 				borderStyle={"solid"}
 				borderColor={useColorModeValue("gray.200", "gray.900")}

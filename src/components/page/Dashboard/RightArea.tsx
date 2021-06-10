@@ -1,9 +1,9 @@
 import React from "react";
 import useDashboardStore from "../../../core/store/useDashboardStore";
-import { ContactRight } from "./tabs/Contact";
-import { DashboardRight } from "./tabs/Dashboard";
-import { NetworkRight } from "./tabs/Network";
-import { StatisticsRight } from "./tabs/Statistics";
+import { ContactRight } from "./tabs/Contact/Contact";
+import { DashboardRight } from "./tabs/Dashboard/Dashboard";
+import { NetworkRight } from "./tabs/Network/Network";
+import { StatisticsRight } from "./tabs/Statistics/Statistics";
 import { TABS } from "./utils/leftTabs";
 
 interface Props {}

@@ -6,7 +6,7 @@ import React, { Fragment } from "react";
 const NetworkCenter: React.FC = () => {
 	const handleAddNetwork = () => {};
 	return (
-		<Box paddingX="10" paddingY="5">
+		<Box paddingX="10" paddingY="3">
 			<Flex>
 				<Text mb="2" fontSize="25px">
 					Network
