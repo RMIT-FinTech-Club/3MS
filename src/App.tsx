@@ -2,7 +2,6 @@ import React from "react";
 import "./global-style.scss";
 
 import AppRouter from "./AppRouter";
-import Navbar from "./components/Navbar";
 import { useAuthStore } from "./core/store";
 
 function App() {

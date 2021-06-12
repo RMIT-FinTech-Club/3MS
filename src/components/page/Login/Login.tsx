@@ -30,6 +30,7 @@ import "react-toastify/dist/ReactToastify.css";
 import ReactLoading from "react-loading";
 import { Provider, User } from "@supabase/gotrue-js";
 import { useHistory } from "react-router";
+import { addNewDistributor } from "../../../core/api/distributors";
 
 interface Props {}
 
@@ -65,6 +66,10 @@ const Login = (props: Props) => {
 			setUiLoading((load) => (load = false));
 			return;
 		}
+		await addNewDistributor({
+			email: res.user?.email as string,
+			distributor_id: res.user?.id as string,
+		})
 		setInputError("");
 		setUiLoading((load) => (load = false));
 		loginStateChanged(res.user as User);

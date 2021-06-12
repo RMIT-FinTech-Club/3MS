@@ -12,12 +12,12 @@ import Landing from "./components/page/Landing/Landing";
 import { useAuthStore } from "./core/store";
 import Navbar from "./components/Navbar";
 import PreRenderer from "./components/PreRenderer";
+import Network from "./components/page/Dashboard/tabs/Network/Network";
 
 interface Props {}
 
 const AppRouter = (props: Props) => {
 	const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
-	const authUser = useAuthStore((state) => state.currentUser);
 	return (
 		<Router>
 			<Navbar />
@@ -40,6 +40,9 @@ const AppRouter = (props: Props) => {
 							return <Dashboard />;
 						}}
 					></PreRenderer>
+				</Route>
+				<Route path="/dashboard/networks/:network_id">
+					<Network />
 				</Route>
 			</Switch>
 		</Router>

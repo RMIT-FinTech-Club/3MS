@@ -3,7 +3,7 @@ import useDashboardStore from "../../../core/store/useDashboardStore";
 import { ContactRight } from "./tabs/Contact/Contact";
 import { DashboardRight } from "./tabs/Dashboard/Dashboard";
 import { IntegrationsRight } from "./tabs/Integrations/Integrations";
-import { NetworkRight } from "./tabs/Network/Network";
+import { NetworkRight } from "./tabs/Network/Networks";
 import { StatisticsRight } from "./tabs/Statistics/Statistics";
 import { TABS } from "./utils/leftTabs";
 

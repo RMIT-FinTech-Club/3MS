@@ -37,7 +37,7 @@ const LeftArea = (props: Props) => {
 			<Divider />
 			<IconButton
 				aria-label="Search database"
-				bg={tabSelected == TABS.DASHBOARD ? "twitter.100" : "transparent"}
+				bg={tabSelected === TABS.DASHBOARD ? "twitter.100" : "transparent"}
 				icon={
 					<Fragment>
 						<FaChalkboard />
@@ -54,7 +54,7 @@ const LeftArea = (props: Props) => {
 			/>
 			<IconButton
 				aria-label="Search database"
-				bg={tabSelected == TABS.NETWORK ? "twitter.100" : "transparent"}
+				bg={tabSelected === TABS.NETWORK ? "twitter.100" : "transparent"}
 				icon={
 					<Fragment>
 						<FaNetworkWired />
@@ -71,7 +71,7 @@ const LeftArea = (props: Props) => {
 			/>
 			<IconButton
 				aria-label="Search database"
-				bg={tabSelected == TABS.STATISTICS ? "twitter.100" : "transparent"}
+				bg={tabSelected === TABS.STATISTICS ? "twitter.100" : "transparent"}
 				icon={
 					<Fragment>
 						<FaChartBar />
@@ -88,7 +88,7 @@ const LeftArea = (props: Props) => {
 			/>
 			<IconButton
 				aria-label="Search database"
-				bg={tabSelected == TABS.CONTACT ? "twitter.100" : "transparent"}
+				bg={tabSelected === TABS.CONTACT ? "twitter.100" : "transparent"}
 				icon={
 					<Fragment>
 						<FaUserFriends />
@@ -105,7 +105,7 @@ const LeftArea = (props: Props) => {
 			/>
 			<IconButton
 				aria-label="Search database"
-				bg={tabSelected == TABS.INTEGRATIONS ? "twitter.100" : "transparent"}
+				bg={tabSelected === TABS.INTEGRATIONS ? "twitter.100" : "transparent"}
 				icon={
 					<Fragment>
 						<FaToolbox />

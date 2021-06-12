@@ -1,8 +1,6 @@
 import React from "react";
 import { Box, Divider, SimpleGrid, Text } from "@chakra-ui/layout";
 import IntegrationsCard from "./IntegrationsCard";
-import { getIntegrations } from "../../../../../core/api/integrations";
-import { useQuery, useQueryClient } from "react-query";
 import useGlobalStore from "../../../../../core/store/useGlobalStore";
 
 const IntegrationsCenter: React.FC = () => {

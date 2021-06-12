@@ -2,21 +2,9 @@
 import React from "react";
 import { StarIcon } from "@chakra-ui/icons";
 import { Badge, Box } from "@chakra-ui/layout";
+import { MSNetwork } from "../../../../../global-types";
 
-interface Props {
-	distributorsCount: number;
-	totalPv: number;
-	badges: {
-		name: string;
-		color: string;
-	}[];
-	title: string;
-	formattedPrice: string;
-	reviewCount: number;
-	rating: number;
-}
-
-const NetworkCard = (props: Props) => {
+const NetworkCard = (props: MSNetwork) => {
 	return (
 		<Box
 			maxW="sm"
@@ -31,8 +19,8 @@ const NetworkCard = (props: Props) => {
 			<Box p="6">
 				<Box d="flex" alignItems="baseline">
 					{props.badges.map((badge) => (
-						<Badge borderRadius="full" mr="1" px="2" colorScheme={badge.color}>
-							{badge.name}
+						<Badge borderRadius="full" mr="1" px="2" colorScheme="teal.400">
+							{badge}
 						</Badge>
 					))}
 					<Box
@@ -43,7 +31,7 @@ const NetworkCard = (props: Props) => {
 						textTransform="uppercase"
 						ml="2"
 					>
-						{props.distributorsCount} distributors &bull; {props.totalPv} PV
+						{props.distributorCount} distributors &bull; {props.totalPv} PV
 					</Box>
 				</Box>
 
@@ -57,7 +45,7 @@ const NetworkCard = (props: Props) => {
 					{props.title}
 				</Box>
 
-				<Box>Revenue: {props.formattedPrice}</Box>
+				<Box>Revenue: ${props.revenue}</Box>
 				<Box d="flex" mt="2" alignItems="center">
 					{Array(5)
 						.fill("")
@@ -68,7 +56,7 @@ const NetworkCard = (props: Props) => {
 							/>
 						))}
 					<Box as="span" ml="2" color="gray.600" fontSize="sm">
-						{props.reviewCount} rating point
+						{props.point} rating point
 					</Box>
 				</Box>
 			</Box>

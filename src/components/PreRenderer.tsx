@@ -1,5 +1,5 @@
 import React from "react";
-import { useQuery, useQueryClient } from "react-query";
+// import { useQueryClient } from "react-query";
 import { getIntegrations } from "../core/api/integrations";
 import useGlobalStore from "../core/store/useGlobalStore";
 
@@ -13,10 +13,8 @@ interface Props {
 }
 
 const PreRenderer: React.FC<Props> = (props) => {
-	const queryClient = useQueryClient();
+	// const queryClient = useQueryClient();
 	const globalStore = useGlobalStore();
-
-	console.log(globalStore);
 
 	React.useEffect(() => {
 		const fetch = async () => {

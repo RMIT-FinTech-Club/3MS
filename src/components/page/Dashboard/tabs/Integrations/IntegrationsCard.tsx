@@ -1,7 +1,7 @@
 // Sample card from Airbnb
 import React from "react";
 import { Badge, Box, Center } from "@chakra-ui/layout";
-import { Image } from "@chakra-ui/image";
+import { Img } from "@chakra-ui/image";
 
 interface Props {
 	name: string;
@@ -26,7 +26,11 @@ const IntegrationsCard = (props: Props) => {
 		>
 			<Box p="6">
 				<Center>
-					<Image src={props.imageUrl} alt={props.imageAlt} />
+					<Img
+						src={props.imageUrl}
+						alt={props.imageAlt}
+						fallbackSrc="https://via.placeholder.com/150"
+					/>
 				</Center>
 				<Box d="flex" alignItems="baseline">
 					<Badge borderRadius="full" mr="1" px="2" colorScheme="teal">

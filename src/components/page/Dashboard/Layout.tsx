@@ -2,7 +2,7 @@ import React from "react";
 import LeftArea from "./LeftArea";
 import CenterArea from "./CenterArea";
 import RightArea from "./RightArea";
-import { Grid, GridItem, Stack } from "@chakra-ui/layout";
+import { Grid, GridItem } from "@chakra-ui/layout";
 import { useDisclosure } from "@chakra-ui/hooks";
 import useDashboardStore from "../../../core/store/useDashboardStore";
 import { TABS } from "./utils/leftTabs";
@@ -76,7 +76,7 @@ const DashboardLayout = (props: Props) => {
 				{/* Center area */}
 				<CenterArea />
 			</GridItem>
-			{RATIO_RIGHT != 0 && (
+			{RATIO_RIGHT !== 0 && (
 				<GridItem colSpan={RATIO_RIGHT} rowSpan={2} bg="white" mt="60px">
 					{/* Right sidebar */}
 					<RightArea />
