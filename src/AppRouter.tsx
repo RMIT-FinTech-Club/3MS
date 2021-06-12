@@ -31,6 +31,9 @@ const AppRouter = (props: Props) => {
 				<Route path="/register">
 					<Register />
 				</Route>
+				<Route exact path="/dashboard/networks/:networkId">
+					<Network />
+				</Route>
 				<Route path="/dashboard">
 					<PreRenderer
 						fetchedData={{
@@ -40,9 +43,6 @@ const AppRouter = (props: Props) => {
 							return <Dashboard />;
 						}}
 					></PreRenderer>
-				</Route>
-				<Route path="/dashboard/networks/:network_id">
-					<Network />
 				</Route>
 			</Switch>
 		</Router>

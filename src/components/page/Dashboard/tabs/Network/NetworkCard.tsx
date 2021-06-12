@@ -3,10 +3,13 @@ import React from "react";
 import { StarIcon } from "@chakra-ui/icons";
 import { Badge, Box } from "@chakra-ui/layout";
 import { MSNetwork } from "../../../../../global-types";
+import { useHistory } from "react-router-dom";
 
 const NetworkCard = (props: MSNetwork) => {
+	const history = useHistory();
 	return (
 		<Box
+			onClick={() => history.push(`/dashboard/networks/${props.network_id}`)}
 			maxW="sm"
 			borderWidth="1px"
 			borderRadius="lg"
@@ -19,7 +22,7 @@ const NetworkCard = (props: MSNetwork) => {
 			<Box p="6">
 				<Box d="flex" alignItems="baseline">
 					{props.badges.map((badge) => (
-						<Badge borderRadius="full" mr="1" px="2" colorScheme="teal.400">
+						<Badge borderRadius="full" mr="1" px="2" colorScheme="teal">
 							{badge}
 						</Badge>
 					))}

@@ -1,9 +1,10 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 
 interface Props {}
 
 const Network = (props: Props) => {
-	console.log(props);
+	let { networkId } = useParams<{ networkId: string }>();
 	return <div>Network</div>;
 };
 

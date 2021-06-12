@@ -4,10 +4,19 @@ import { Flex, Spacer } from "@chakra-ui/react";
 import NetworkCard from "./NetworkCard";
 import { SimpleGrid } from "@chakra-ui/react";
 import NetworkCreation from "./NetworkCreation";
+import { getNetworks } from "../../../../../core/api/networks";
+import { useQuery } from "react-query";
+import ReusableSpinner from "../../../../ReusableSpinner";
 
 const NetworkCenter: React.FC = () => {
-	let networks = [];
-	return (
+	let query = useQuery("networks", async () => await getNetworks(), {
+		cacheTime: 20000,
+	});
+	return query.isLoading || query.isFetching ? (
+		<Center h="2xl">
+			<ReusableSpinner />
+		</Center>
+	) : (
 		<Box paddingX="10" paddingY="3">
 			<Flex>
 				<Text mb="2" fontSize="25px">
@@ -28,7 +37,7 @@ const NetworkCenter: React.FC = () => {
 				}}
 				spacing={2}
 			>
-				{networks.map((p) => (
+				{query?.data?.map((p) => (
 					<Box>
 						<NetworkCard {...p} />
 					</Box>
