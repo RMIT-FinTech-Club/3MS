@@ -12,12 +12,14 @@ import Landing from "./components/page/Landing/Landing";
 import { useAuthStore } from "./core/store";
 import Navbar from "./components/Navbar";
 import PreRenderer from "./components/PreRenderer";
-import Network from "./components/page/Dashboard/tabs/Network/Network";
+import useDashboardStore from "./core/store/useDashboardStore";
+import { TABS } from "./components/page/Dashboard/utils/leftTabs";
 
 interface Props {}
 
 const AppRouter = (props: Props) => {
 	const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
+	let switchTab = useDashboardStore((state) => state.switchTab);
 	return (
 		<Router>
 			<Navbar />
@@ -32,7 +34,12 @@ const AppRouter = (props: Props) => {
 					<Register />
 				</Route>
 				<Route exact path="/dashboard/networks/:networkId">
-					<Network />
+					<PreRenderer
+						component={() => {
+							switchTab(TABS.NETWORK);
+							return <Dashboard />;
+						}}
+					></PreRenderer>
 				</Route>
 				<Route path="/dashboard">
 					<PreRenderer

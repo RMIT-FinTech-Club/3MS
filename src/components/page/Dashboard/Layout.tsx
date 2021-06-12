@@ -19,8 +19,11 @@ const DashboardLayout = (props: Props) => {
 	switch (route) {
 		case TABS.DASHBOARD:
 			break;
-		case TABS.NETWORK:
+		case TABS.NETWORKS:
 			RATIO_RIGHT = 0;
+			break;
+		case TABS.NETWORK:
+			RATIO_RIGHT = 5;
 			break;
 		case TABS.CONTACT:
 			break;

@@ -3,7 +3,8 @@ import useDashboardStore from "../../../core/store/useDashboardStore";
 import { ContactRight } from "./tabs/Contact/Contact";
 import { DashboardRight } from "./tabs/Dashboard/Dashboard";
 import { IntegrationsRight } from "./tabs/Integrations/Integrations";
-import { NetworkRight } from "./tabs/Network/Networks";
+import { NetworksRight } from "./tabs/Network/Networks";
+import { NetworkRight } from "./tabs/Network/Network";
 import { StatisticsRight } from "./tabs/Statistics/Statistics";
 import { TABS } from "./utils/leftTabs";
 
@@ -14,6 +15,8 @@ const RightArea = (props: Props) => {
 	switch (route) {
 		case TABS.DASHBOARD:
 			return <DashboardRight />;
+		case TABS.NETWORKS:
+			return <NetworksRight />;
 		case TABS.NETWORK:
 			return <NetworkRight />;
 		case TABS.CONTACT:

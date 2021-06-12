@@ -8,7 +8,7 @@ import { getNetworks } from "../../../../../core/api/networks";
 import { useQuery } from "react-query";
 import ReusableSpinner from "../../../../ReusableSpinner";
 
-const NetworkCenter: React.FC = () => {
+const NetworksCenter: React.FC = () => {
 	let query = useQuery("networks", async () => await getNetworks(), {
 		cacheTime: 20000,
 	});
@@ -47,8 +47,8 @@ const NetworkCenter: React.FC = () => {
 	);
 };
 
-const NetworkRight: React.FC = () => {
+const NetworksRight: React.FC = () => {
 	return <div>Network</div>;
 };
 
-export { NetworkCenter, NetworkRight };
+export { NetworksCenter, NetworksRight };

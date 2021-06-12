@@ -70,7 +70,7 @@ const Login = (props: Props) => {
 			return;
 		}
 		let distributor = await getDistributor({ id: res.user?.id as string });
-		if (distributor.length == 0) {
+		if (distributor.length === 0) {
 			await addNewDistributor({
 				email: res.user?.email as string,
 				distributor_id: res.user?.id as string,

@@ -1,13 +1,15 @@
 type SidebarTab = {
 	DASHBOARD: string;
-	NETWORK: string;
+	NETWORKS: string;
 	CONTACT: string;
+	NETWORK: string;
 	STATISTICS: string;
 	INTEGRATIONS: string;
 };
 
 const TABS: SidebarTab = {
 	DASHBOARD: "DASHBOARD",
+	NETWORKS: "NETWORKS",
 	NETWORK: "NETWORK",
 	STATISTICS: "STATISTICS",
 	CONTACT: "CONTACT",

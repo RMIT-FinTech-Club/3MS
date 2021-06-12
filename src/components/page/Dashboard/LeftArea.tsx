@@ -9,6 +9,7 @@ import {
 	FaToolbox,
 	FaUserFriends,
 } from "react-icons/fa";
+import { useHistory } from "react-router-dom";
 import useDashboardStore from "../../../core/store/useDashboardStore";
 import { TABS } from "./utils/leftTabs";
 
@@ -18,11 +19,13 @@ interface Props {
 }
 
 const LeftArea = (props: Props) => {
+	const history = useHistory();
 	const dashboardStore = useDashboardStore();
 	const [tabSelected, setTabSelected] = React.useState<string>(
 		dashboardStore.tab
 	);
 	const handleSwitchTab = (tabName: string) => {
+		history.push("/");
 		setTabSelected((tab) => (tab = tabName));
 		dashboardStore.switchTab(tabName);
 	};
@@ -54,7 +57,7 @@ const LeftArea = (props: Props) => {
 			/>
 			<IconButton
 				aria-label="Search database"
-				bg={tabSelected === TABS.NETWORK ? "twitter.100" : "transparent"}
+				bg={tabSelected === TABS.NETWORKS ? "twitter.100" : "transparent"}
 				icon={
 					<Fragment>
 						<FaNetworkWired />
@@ -67,7 +70,7 @@ const LeftArea = (props: Props) => {
 						)}
 					</Fragment>
 				}
-				onClick={() => handleSwitchTab(TABS.NETWORK)}
+				onClick={() => handleSwitchTab(TABS.NETWORKS)}
 			/>
 			<IconButton
 				aria-label="Search database"
