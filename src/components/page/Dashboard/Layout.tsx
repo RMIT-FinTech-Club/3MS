@@ -58,7 +58,7 @@ const DashboardLayout = (props: Props) => {
 				<LeftArea onToggle={onToggle} isToggled={isOpen} />
 			</GridItem>
 			<GridItem
-				overflow="scroll"
+				overflow="auto"
 				css={{
 					"&::-webkit-scrollbar": {
 						width: "4px",

@@ -1,11 +1,14 @@
-import React from "react";
+import React, { Provider } from "react";
 import { useParams } from "react-router-dom";
 import { getNetwork } from "../../../../../core/api/networks";
-import Navbar from "../../../../Navbar";
 import NetworkToolbar from "./NetworkToolbar";
 import { useQuery } from "react-query";
+import { MSNetwork } from "../../../../../global-types";
+import NetworkVisualizer from "./NetworkVisualizer";
 
 interface Props {}
+
+let NetworkContext = React.createContext<MSNetwork | null>(null);
 
 const NetworkCenter = (props: Props) => {
 	let { networkId } = useParams<{ networkId: string }>();
@@ -14,18 +17,16 @@ const NetworkCenter = (props: Props) => {
 		async () => await getNetwork({ id: networkId })
 	);
 
-	console.log(networkQuery);
-
 	return (
-		<div>
+		<NetworkContext.Provider value={networkQuery.data?.[0]}>
 			<NetworkToolbar />
-		</div>
+			<NetworkVisualizer />
+		</NetworkContext.Provider>
 	);
 };
 
 const NetworkRight = (props: Props) => {
-	let { networkId } = useParams<{ networkId: string }>();
 	return <div>Network</div>;
 };
 
-export { NetworkCenter, NetworkRight };
+export { NetworkCenter, NetworkRight, NetworkContext };
