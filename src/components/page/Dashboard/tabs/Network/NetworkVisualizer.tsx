@@ -1,9 +1,10 @@
 import { Box } from "@chakra-ui/react";
-import React from "react";
-import {
-	GraphView,
-	Node, // optional
-} from "react-digraph";
+import React, { useContext, useEffect } from "react";
+import { GraphView } from "react-digraph";
+import { useQuery } from "react-query";
+import { getDistributor } from "../../../../../core/api/distributors";
+import { getNetworkDistributors } from "../../../../../core/api/network_distributors";
+import { NetworkContext } from "./Network";
 
 const GraphConfig = {
 	NodeTypes: {
@@ -46,52 +47,22 @@ const GraphConfig = {
 
 const NODE_KEY = "id";
 
-let sample = {
-	nodes: [
-		{
-			id: 1,
-			title: "Node A",
-			x: 258.3976135253906,
-			y: 331.9783248901367,
-			type: "empty",
-		},
-		{
-			id: 2,
-			title: "Node B",
-			x: 593.9393920898438,
-			y: 260.6060791015625,
-			type: "empty",
-		},
-		{
-			id: 3,
-			title: "Node C",
-			x: 237.5757598876953,
-			y: 61.81818389892578,
-			type: "empty",
-		},
-		{
-			id: 4,
-			title: "Node C",
-			x: 600.5757598876953,
-			y: 600.81818389892578,
-			type: "empty",
-		},
-	],
-	edges: [
-		{
-			source: 1,
-			target: 2,
-			type: "emptyEdge",
-		},
-		{
-			source: 2,
-			target: 3,
-			type: "emptyEdge",
-		},
-	],
-};
-
 const NetworkVisualizer: React.FC = () => {
+	let sample = {
+		nodes: [],
+		edges: [
+			// {
+			// 	source: 1,
+			// 	target: 2,
+			// 	type: "emptyEdge",
+			// },
+			// {
+			// 	source: 2,
+			// 	target: 3,
+			// 	type: "emptyEdge",
+			// },
+		],
+	};
 	const graphViewContainer = React.useRef(null);
 	const [state, setState] = React.useState<{
 		graph: {
@@ -103,6 +74,54 @@ const NetworkVisualizer: React.FC = () => {
 		graph: sample,
 		selected: {},
 	});
+	let { network, networkState, setNetworkState } = useContext(NetworkContext);
+	let networkDistributorsQuery = useQuery(
+		"networkDistributors",
+		async () =>
+			await getNetworkDistributors({
+				network_id: network?.network_id,
+			}),
+		{
+			staleTime: 5000,
+		}
+	);
+	useEffect(() => {
+		if (networkDistributorsQuery?.data instanceof Array) {
+			let mapDistributors: any = [];
+			const fetchDistributors = async () => {
+				for (let distributor of networkDistributorsQuery?.data as any) {
+					let localDistributors = await getDistributor({
+						id: distributor?.distributor_id,
+					});
+
+					let localDistributor = localDistributors?.[0];
+					mapDistributors.push({ ...localDistributor, ...distributor });
+				}
+				let sampleNodes = mapDistributors?.map((distributor) => ({
+					id: 1,
+					title: (distributor.email as string).split("@")[0],
+					x: 258.3976135253906,
+					y: 331.9783248901367,
+					type: "empty",
+				}));
+
+				setState(
+					(state) =>
+						(state = {
+							...state,
+							graph: {
+								...state.graph,
+								nodes: sampleNodes,
+							},
+						})
+				);
+				setNetworkState?.(
+					(state) => (state = { ...state, distributors: mapDistributors })
+				);
+			};
+			fetchDistributors();
+		}
+	}, [networkDistributorsQuery?.data]);
 
 	const nodes = state.graph.nodes;
 	const edges = state.graph.edges;
@@ -126,7 +145,9 @@ const NetworkVisualizer: React.FC = () => {
 				nodeSubtypes={NodeSubtypes}
 				edgeTypes={EdgeTypes}
 				allowMultiselect={true} // true by default, set to false to disable multi select.
-				onSelect={() => {}}
+				onSelect={(e) => {
+					console.log(e);
+				}}
 				onCreateNode={() => {}}
 				onUpdateNode={() => {}}
 				onDeleteSelected={() => {}}

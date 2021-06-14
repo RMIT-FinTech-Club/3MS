@@ -16,4 +16,20 @@ const addNetworkDistributors = async (dto: AddNetworkDistributorsDTO) => {
 	return data as any;
 };
 
-export { addNetworkDistributors };
+interface GetNetworkDistributorsDTO {
+	network_id: string | undefined;
+}
+
+const getNetworkDistributors = async (dto: GetNetworkDistributorsDTO) => {
+	let { data, error } = await supabase
+		.from("NetworkDistributors")
+		.select("*")
+		.eq("network_id", dto.network_id);
+
+	if (error) {
+		throw new Error(error.message);
+	}
+	return data as any[];
+};
+
+export { addNetworkDistributors, getNetworkDistributors };

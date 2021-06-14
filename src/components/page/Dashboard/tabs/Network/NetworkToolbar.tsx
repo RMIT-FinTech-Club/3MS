@@ -19,8 +19,6 @@ import { useHistory } from "react-router-dom";
 import useDashboardStore from "../../../../../core/store/useDashboardStore";
 import { TABS } from "../../utils/leftTabs";
 import { NetworkContext } from "./Network";
-import { MSNetwork } from "../../../../../global-types";
-import { FcCursor } from "react-icons/fc";
 interface CustomButtonProps {
 	key: number;
 	label: string;
@@ -45,9 +43,11 @@ const CustomButton = (props: CustomButtonProps) => {
 
 const NetworkToolbar = () => {
 	const history = useHistory();
-	const [selectedTool, setSelectedTool] = React.useState<number>(1);
+	let { network, networkState } = useContext(NetworkContext);
+	const [selectedTool, setSelectedTool] = React.useState<number>(
+		networkState.toolId
+	);
 	let switchTab = useDashboardStore((state) => state.switchTab);
-	let network: MSNetwork | null = useContext(NetworkContext);
 
 	const tools: CustomButtonProps[] = [
 		{
@@ -117,7 +117,7 @@ const NetworkToolbar = () => {
 							<CustomButton
 								key={tool.key}
 								label={tool.label}
-								isSelected={tool.key == selectedTool}
+								isSelected={tool.key === selectedTool}
 								icon={tool.icon}
 								onClickHandler={() => {
 									setSelectedTool(tool.key);

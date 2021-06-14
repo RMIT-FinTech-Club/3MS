@@ -80,7 +80,7 @@ const DashboardLayout = (props: Props) => {
 				<CenterArea />
 			</GridItem>
 			{RATIO_RIGHT !== 0 && (
-				<GridItem colSpan={RATIO_RIGHT} rowSpan={2} bg="white" mt="60px">
+				<GridItem colSpan={RATIO_RIGHT} rowSpan={2} mt="60px">
 					{/* Right sidebar */}
 					<RightArea />
 				</GridItem>
