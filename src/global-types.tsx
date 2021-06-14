@@ -3,6 +3,14 @@ export interface MSDistributor {
 	distributor_id: string;
 }
 
+export interface MappedMSDistributor extends MSDistributor {
+	distributor_position: string;
+	network_id: string;
+	parent: string;
+	children: string[];
+	pv: number;
+}
+
 export interface MSNetwork {
 	network_id: string;
 	description: string;

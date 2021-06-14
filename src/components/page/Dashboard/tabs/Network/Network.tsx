@@ -3,7 +3,11 @@ import { useParams } from "react-router-dom";
 import { getNetwork } from "../../../../../core/api/networks";
 import NetworkToolbar from "./NetworkToolbar";
 import { useQuery } from "react-query";
-import { MSDistributor, MSNetwork } from "../../../../../global-types";
+import {
+	MappedMSDistributor,
+	MSDistributor,
+	MSNetwork,
+} from "../../../../../global-types";
 import NetworkVisualizer from "./NetworkVisualizer";
 import {
 	Grid,
@@ -26,11 +30,6 @@ interface Props {}
 interface NetworkState {
 	toolId: number;
 	distributors: MappedMSDistributor[] | null;
-}
-
-interface MappedMSDistributor extends MSDistributor {
-	position: string;
-	network_id: string;
 }
 
 let NetworkContext = React.createContext<{
