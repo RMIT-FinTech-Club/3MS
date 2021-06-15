@@ -1,32 +1,38 @@
 import { Box } from "@chakra-ui/react";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, Fragment } from "react";
 import { GraphView } from "react-digraph";
 import { useQuery } from "react-query";
 import { getDistributor } from "../../../../../core/api/distributors";
 import { getNetworkDistributors } from "../../../../../core/api/network_distributors";
+import { MappedMSDistributor } from "../../../../../global-types";
 import { NetworkContext } from "./Network";
+import NetworkScoreboard from "./NetworkScoreboard";
+
+let shape = (
+	<symbol viewBox="0 0 100 100" id="empty" key="0">
+		<circle cx="50" cy="50" r="45"></circle>
+	</symbol>
+);
 
 const GraphConfig = {
 	NodeTypes: {
-		empty: {
+		Unknown: {
 			// required to show empty nodes
-			typeText: "None",
+			typeText: "Unknown",
 			shapeId: "#empty", // relates to the type property of a node
-			shape: (
-				<symbol viewBox="0 0 100 100" id="empty" key="0">
-					<circle cx="50" cy="50" r="45"></circle>
-				</symbol>
-			),
+			shape,
 		},
-		custom: {
+		Platinum: {
 			// required to show empty nodes
-			typeText: "Custom",
-			shapeId: "#custom", // relates to the type property of a node
-			shape: (
-				<symbol viewBox="0 0 50 25" id="custom" key="0">
-					<ellipse cx="50" cy="25" rx="50" ry="25"></ellipse>
-				</symbol>
-			),
+			typeText: "Platinum",
+			shapeId: "#empty", // relates to the type property of a node
+			shape,
+		},
+		Bronze: {
+			// required to show empty nodes
+			typeText: "Bronze",
+			shapeId: "#empty", // relates to the type property of a node
+			shape,
 		},
 	},
 	NodeSubtypes: {},
@@ -48,6 +54,7 @@ const GraphConfig = {
 const NODE_KEY = "id";
 
 const NetworkVisualizer: React.FC = () => {
+	let [graphConfig, setGraphConfig] = React.useState(GraphConfig);
 	let sample = {
 		nodes: [],
 		edges: [
@@ -87,7 +94,7 @@ const NetworkVisualizer: React.FC = () => {
 	);
 	useEffect(() => {
 		if (networkDistributorsQuery?.data instanceof Array) {
-			let mapDistributors: any = [];
+			let mapDistributors: MappedMSDistributor[] = [];
 			const fetchDistributors = async () => {
 				for (let distributor of networkDistributorsQuery?.data as any) {
 					let localDistributors = await getDistributor({
@@ -98,11 +105,11 @@ const NetworkVisualizer: React.FC = () => {
 					mapDistributors.push({ ...localDistributor, ...distributor });
 				}
 				let sampleNodes = mapDistributors?.map((distributor) => ({
-					id: 1,
+					id: distributor.distributor_id,
 					title: (distributor.email as string).split("@")[0],
 					x: 258.3976135253906,
 					y: 331.9783248901367,
-					type: "empty",
+					type: distributor.distributor_position,
 				}));
 
 				setState(
@@ -121,40 +128,43 @@ const NetworkVisualizer: React.FC = () => {
 			};
 			fetchDistributors();
 		}
-	}, [networkDistributorsQuery?.data]);
+	}, [networkDistributorsQuery?.data, setNetworkState]);
 
 	const nodes = state.graph.nodes;
 	const edges = state.graph.edges;
 	const selected = state.selected;
 
-	const NodeTypes = GraphConfig.NodeTypes;
-	const NodeSubtypes = GraphConfig.NodeSubtypes;
-	const EdgeTypes = GraphConfig.EdgeTypes;
+	const NodeTypes = graphConfig.NodeTypes;
+	const NodeSubtypes = graphConfig.NodeSubtypes;
+	const EdgeTypes = graphConfig.EdgeTypes;
 
 	const handleClick = () => {};
 
 	return (
-		<Box id="graph" height="91%" onClick={handleClick} cursor="crosshair">
-			<GraphView
-				ref={graphViewContainer}
-				nodeKey={NODE_KEY}
-				nodes={nodes}
-				edges={edges}
-				selected={selected}
-				nodeTypes={NodeTypes}
-				nodeSubtypes={NodeSubtypes}
-				edgeTypes={EdgeTypes}
-				allowMultiselect={true} // true by default, set to false to disable multi select.
-				onSelect={(e) => {
-					console.log(e);
-				}}
-				onCreateNode={() => {}}
-				onUpdateNode={() => {}}
-				onDeleteSelected={() => {}}
-				onCreateEdge={() => {}}
-				onSwapEdge={() => {}}
-			/>
-		</Box>
+		<Fragment>
+			<NetworkScoreboard networkState={networkState} />
+			<Box id="graph" height="91%" onClick={handleClick} cursor="crosshair">
+				<GraphView
+					ref={graphViewContainer}
+					nodeKey={NODE_KEY}
+					nodes={nodes}
+					edges={edges}
+					selected={selected}
+					nodeTypes={NodeTypes}
+					nodeSubtypes={NodeSubtypes}
+					edgeTypes={EdgeTypes}
+					allowMultiselect={true} // true by default, set to false to disable multi select.
+					onSelect={(e) => {
+						console.log(e);
+					}}
+					onCreateNode={() => {}}
+					onUpdateNode={() => {}}
+					onDeleteSelected={() => {}}
+					onCreateEdge={() => {}}
+					onSwapEdge={() => {}}
+				/>
+			</Box>
+		</Fragment>
 	);
 };
 

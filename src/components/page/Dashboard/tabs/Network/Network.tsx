@@ -27,7 +27,7 @@ import NetworkChart from "./NetworkChart";
 
 interface Props {}
 
-interface NetworkState {
+export interface NetworkState {
 	toolId: number;
 	distributors: MappedMSDistributor[] | null;
 }
@@ -131,7 +131,7 @@ const NetworkRight = (props: Props) => {
 							{integration?.description}
 						</Text>
 					</Box>
-					<Center ml={2}>
+					<Center ml={5}>
 						<Img src={integration?.imageUrl} />
 					</Center>
 				</Flex>
