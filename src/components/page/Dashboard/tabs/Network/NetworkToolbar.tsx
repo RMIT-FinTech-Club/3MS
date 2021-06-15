@@ -43,7 +43,7 @@ const CustomButton = (props: CustomButtonProps) => {
 
 const NetworkToolbar = () => {
 	const history = useHistory();
-	let { network, networkState } = useContext(NetworkContext);
+	let { network, networkState, setNetworkState } = useContext(NetworkContext);
 	const [selectedTool, setSelectedTool] = React.useState<number>(
 		networkState.toolId
 	);
@@ -121,6 +121,9 @@ const NetworkToolbar = () => {
 								icon={tool.icon}
 								onClickHandler={() => {
 									setSelectedTool(tool.key);
+									setNetworkState?.(
+										(state) => (state = { ...state, toolId: tool.key })
+									);
 									tool.onClickHandler();
 								}}
 							/>

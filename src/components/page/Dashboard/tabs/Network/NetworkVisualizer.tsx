@@ -71,6 +71,13 @@ const NetworkVisualizer: React.FC = () => {
 		],
 	};
 	const graphViewContainer = React.useRef(null);
+	const [position, setPosition] = React.useState<{
+		x: number;
+		y: number;
+	}>({
+		x: 0,
+		y: 0,
+	});
 	const [state, setState] = React.useState<{
 		graph: {
 			nodes: any[];
@@ -138,12 +145,32 @@ const NetworkVisualizer: React.FC = () => {
 	const NodeSubtypes = graphConfig.NodeSubtypes;
 	const EdgeTypes = graphConfig.EdgeTypes;
 
-	const handleClick = () => {};
+	const handleClick = () => {
+		console.log(networkState);
+	};
+
+	const handleMouseMove = (e) => {
+		setPosition(
+			(position) =>
+				(position = {
+					x: e.nativeEvent.offsetX,
+					y: e.nativeEvent.offsetY,
+				})
+		);
+
+		console.log(position);
+	};
 
 	return (
 		<Fragment>
 			<NetworkScoreboard networkState={networkState} />
-			<Box id="graph" height="91%" onClick={handleClick} cursor="crosshair">
+			<Box
+				id="graph"
+				height="91%"
+				onMouseMove={handleMouseMove}
+				onClick={handleClick}
+				cursor={networkState.toolId === 2 ? "crosshair" : "move"}
+			>
 				<GraphView
 					ref={graphViewContainer}
 					nodeKey={NODE_KEY}
