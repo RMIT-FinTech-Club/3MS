@@ -7,6 +7,7 @@ import { getNetworkDistributors } from "../../../../../core/api/network_distribu
 import { MappedMSDistributor } from "../../../../../global-types";
 import { NetworkContext } from "./Network";
 import NetworkScoreboard from "./NetworkScoreboard";
+import NetworkAddForm from "./NetworkAddForm";
 
 let shape = (
 	<symbol viewBox="0 0 100 100" id="empty" key="0">
@@ -55,6 +56,8 @@ const NODE_KEY = "id";
 
 const NetworkVisualizer: React.FC = () => {
 	let [graphConfig, setGraphConfig] = React.useState(GraphConfig);
+	const [isAddFormOpened, setIsAddFormOpened] = React.useState<boolean>(false);
+	const [isSetPosition, SetIsSetPosition] = React.useState<boolean>(true);
 	let sample = {
 		nodes: [],
 		edges: [
@@ -146,7 +149,8 @@ const NetworkVisualizer: React.FC = () => {
 	const EdgeTypes = graphConfig.EdgeTypes;
 
 	const handleClick = () => {
-		console.log(networkState);
+		setIsAddFormOpened((isOpened) => (isOpened = !isOpened));
+		SetIsSetPosition((isSetPosition) => (isSetPosition = !isSetPosition));
 	};
 
 	const handleMouseMove = (e) => {
@@ -157,17 +161,16 @@ const NetworkVisualizer: React.FC = () => {
 					y: e.nativeEvent.offsetY,
 				})
 		);
-
-		console.log(position);
 	};
 
 	return (
 		<Fragment>
 			<NetworkScoreboard networkState={networkState} />
+			{isAddFormOpened && <NetworkAddForm position={position} />}
 			<Box
 				id="graph"
 				height="91%"
-				onMouseMove={handleMouseMove}
+				onMouseMove={isSetPosition ? handleMouseMove : () => {}}
 				onClick={handleClick}
 				cursor={networkState.toolId === 2 ? "crosshair" : "move"}
 			>
