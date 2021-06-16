@@ -1,5 +1,19 @@
-import React from "react";
-import { Box, FormControl, FormLabel, Input, Button } from "@chakra-ui/react";
+import React, { useContext } from "react";
+import {
+	Box,
+	FormControl,
+	FormLabel,
+	Input,
+	Button,
+	InputGroup,
+	InputRightElement,
+	Select,
+} from "@chakra-ui/react";
+import { CheckIcon } from "@chakra-ui/icons";
+import AmwayLevels from "../../../../../constants/amway-levels.json";
+import HerbalifeLevels from "../../../../../constants/herbalife_levels.json";
+import { NetworkContext } from "./Network";
+import { MappedMSDistributor } from "../../../../../global-types";
 
 interface Props {
 	position: {
@@ -9,6 +23,17 @@ interface Props {
 }
 
 const NetworkAddForm = (props: Props) => {
+	let { network } = useContext(NetworkContext);
+	const [input, setInput] = React.useState<MappedMSDistributor>({
+		children: [],
+		distributor_id: "",
+		distributor_position: "",
+		email: "",
+		network_id: "",
+		pv: 0,
+		parent: "",
+	});
+	const handleAddDistributor = () => {};
 	return (
 		<Box
 			m={4}
@@ -26,11 +51,17 @@ const NetworkAddForm = (props: Props) => {
 		>
 			<FormControl id="email" mb={2} isRequired>
 				<FormLabel>Email address</FormLabel>
-				<Input placeholder="Enter a valid email" type="email" />
+				<InputGroup>
+					<Input placeholder="Enter a valid email" type="email" />
+					<InputRightElement children={<CheckIcon color="green.500" />} />
+				</InputGroup>
 			</FormControl>
 			<FormControl id="parent" mb={2}>
 				<FormLabel>Parent</FormLabel>
-				<Input placeholder="Email of parent node" type="text" />
+				<InputGroup>
+					<Input placeholder="Email of parent node" type="text" />
+					<InputRightElement children={<CheckIcon color="green.500" />} />
+				</InputGroup>
 			</FormControl>
 			<FormControl id="pv" mb={2}>
 				<FormLabel>Default PV</FormLabel>
@@ -38,7 +69,11 @@ const NetworkAddForm = (props: Props) => {
 			</FormControl>
 			<FormControl id="position" mb={4}>
 				<FormLabel>Position</FormLabel>
-				<Input placeholder="Position in the MLM network" type="text" />
+				<Select placeholder="Unknown" size="md">
+					{network?.integration === 1
+						? AmwayLevels.map((level) => <option>{level.name}</option>)
+						: HerbalifeLevels.map((level) => <option>{level.name}</option>)}
+				</Select>
 			</FormControl>
 			<Button
 				w="full"
@@ -47,6 +82,7 @@ const NetworkAddForm = (props: Props) => {
 				_hover={{
 					background: "twitter.300",
 				}}
+				onClick={handleAddDistributor}
 			>
 				Add
 			</Button>

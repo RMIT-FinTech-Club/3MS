@@ -4,6 +4,8 @@ interface AddNetworkDistributorsDTO {
 	distributor_id?: string;
 	network_id?: string;
 	distributor_position: string;
+	parent?: string; // distributor_id
+	pv: number;
 }
 
 const addNetworkDistributors = async (dto: AddNetworkDistributorsDTO) => {

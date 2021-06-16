@@ -171,7 +171,7 @@ const NetworkVisualizer: React.FC = () => {
 				id="graph"
 				height="91%"
 				onMouseMove={isSetPosition ? handleMouseMove : () => {}}
-				onClick={handleClick}
+				onClick={networkState.toolId === 2 ? handleClick : () => {}}
 				cursor={networkState.toolId === 2 ? "crosshair" : "move"}
 			>
 				<GraphView

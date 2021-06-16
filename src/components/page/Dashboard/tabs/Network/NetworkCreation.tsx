@@ -67,6 +67,7 @@ const NetworkCreation = (props: Props) => {
 				distributor_id: distributor[0]?.distributor_id,
 				network_id: network[0]?.network_id,
 				distributor_position: "Unknown",
+				pv: 0,
 			});
 			setNetwork(networkInput);
 			toast({
