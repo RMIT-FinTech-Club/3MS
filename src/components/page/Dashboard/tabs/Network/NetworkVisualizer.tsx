@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/react";
-import React, { useContext, useEffect, Fragment } from "react";
+import React, { useContext, Fragment, useLayoutEffect } from "react";
 import { GraphView } from "react-digraph";
 import { useQuery } from "react-query";
 import { getDistributor } from "../../../../../core/api/distributors";
@@ -54,8 +54,8 @@ const GraphConfig = {
 
 const NODE_KEY = "id";
 
-const NetworkVisualizer: React.FC = () => {
-	let [graphConfig, setGraphConfig] = React.useState(GraphConfig);
+const NetworkVisualizer: React.FC = React.memo(() => {
+	let graphConfig = React.useMemo(() => GraphConfig, []);
 	const [isAddFormOpened, setIsAddFormOpened] = React.useState<boolean>(false);
 	const [isSetPosition, SetIsSetPosition] = React.useState<boolean>(true);
 	let sample = {
@@ -102,7 +102,7 @@ const NetworkVisualizer: React.FC = () => {
 			staleTime: 5000,
 		}
 	);
-	useEffect(() => {
+	useLayoutEffect(() => {
 		if (networkDistributorsQuery?.data instanceof Array) {
 			let mapDistributors: MappedMSDistributor[] = [];
 			const fetchDistributors = async () => {
@@ -153,15 +153,18 @@ const NetworkVisualizer: React.FC = () => {
 		SetIsSetPosition((isSetPosition) => (isSetPosition = !isSetPosition));
 	};
 
-	const handleMouseMove = (e) => {
-		setPosition(
-			(position) =>
-				(position = {
-					x: e.nativeEvent.offsetX,
-					y: e.nativeEvent.offsetY,
-				})
-		);
-	};
+	const handleMouseMove = React.useCallback(
+		(e) => {
+			setPosition(
+				(position) =>
+					(position = {
+						x: e.nativeEvent.offsetX,
+						y: e.nativeEvent.offsetY,
+					})
+			);
+		},
+		[setPosition]
+	);
 
 	return (
 		<Fragment>
@@ -196,6 +199,6 @@ const NetworkVisualizer: React.FC = () => {
 			</Box>
 		</Fragment>
 	);
-};
+});
 
 export default NetworkVisualizer;

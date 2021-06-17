@@ -19,7 +19,7 @@ interface Props {
 	networkState: NetworkState;
 }
 
-const NetworkScoreboard = (props: Props) => {
+const NetworkScoreboard = React.memo((props: Props) => {
 	const [open, setOpen] = React.useState<boolean>(false);
 	let distributors = props.networkState.distributors;
 	return (
@@ -78,6 +78,6 @@ const NetworkScoreboard = (props: Props) => {
 			</Flex>
 		</Box>
 	);
-};
+});
 
 export default NetworkScoreboard;

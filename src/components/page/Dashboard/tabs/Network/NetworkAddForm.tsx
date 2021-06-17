@@ -23,7 +23,7 @@ interface Props {
 	};
 }
 
-const NetworkAddForm = (props: Props) => {
+const NetworkAddForm = React.memo((props: Props) => {
 	let { network } = useContext(NetworkContext);
 	const [input, setInput] = React.useState<Partial<MappedMSDistributor>>({
 		distributor_id: "",
@@ -121,6 +121,6 @@ const NetworkAddForm = (props: Props) => {
 			</Button>
 		</Box>
 	);
-};
+});
 
 export default NetworkAddForm;

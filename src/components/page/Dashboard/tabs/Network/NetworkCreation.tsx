@@ -113,30 +113,34 @@ const NetworkCreation = (props: Props) => {
 						<FormControl>
 							<FormLabel>Name</FormLabel>
 							<Input
-								onChange={(e) =>
-									setNetworkInput(
-										(input) =>
-											(input = {
-												...input,
-												title: e.target.value,
-											})
-									)
-								}
+								onChange={React.useCallback(
+									(e) =>
+										setNetworkInput(
+											(input) =>
+												(input = {
+													...input,
+													title: e.target.value,
+												})
+										),
+									[]
+								)}
 								placeholder="Your network name."
 							/>
 						</FormControl>
 						<FormControl mt={4}>
 							<FormLabel>Description</FormLabel>
 							<Textarea
-								onChange={(e) =>
-									setNetworkInput(
-										(input) =>
-											(input = {
-												...input,
-												description: e.target.value,
-											})
-									)
-								}
+								onChange={React.useCallback(
+									(e) =>
+										setNetworkInput(
+											(input) =>
+												(input = {
+													...input,
+													description: e.target.value,
+												})
+										),
+									[]
+								)}
 								placeholder="More information about the network."
 							/>
 						</FormControl>

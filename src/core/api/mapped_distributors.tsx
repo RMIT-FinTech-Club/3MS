@@ -1,10 +1,10 @@
 import { MappedMSDistributor } from "../../global-types";
 import { supabase } from "../config/supabase-client";
-import { addNewDistributor, getDistributor } from "./distributors";
-import {
-	addNetworkDistributors,
-	getNetworkDistributors,
-} from "./network_distributors";
+// import { addNewDistributor, getDistributor } from "./distributors";
+// import {
+// 	addNetworkDistributors,
+// 	getNetworkDistributors,
+// } from "./network_distributors";
 
 const getMappedDistributors = async (dto: { distributor_id: string }) => {
 	let { data, error } = await supabase
