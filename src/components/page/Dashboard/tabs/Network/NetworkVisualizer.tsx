@@ -54,7 +54,8 @@ const GraphConfig = {
 
 const NODE_KEY = "id";
 
-const NetworkVisualizer: React.FC = React.memo(() => {
+const NetworkVisualizer: React.FC = () => {
+	console.log("NetworkVisualizer Re-render");
 	let graphConfig = React.useMemo(() => GraphConfig, []);
 	const [isAddFormOpened, setIsAddFormOpened] = React.useState<boolean>(false);
 	const [isSetPosition, SetIsSetPosition] = React.useState<boolean>(true);
@@ -153,18 +154,15 @@ const NetworkVisualizer: React.FC = React.memo(() => {
 		SetIsSetPosition((isSetPosition) => (isSetPosition = !isSetPosition));
 	};
 
-	const handleMouseMove = React.useCallback(
-		(e) => {
-			setPosition(
-				(position) =>
-					(position = {
-						x: e.nativeEvent.offsetX,
-						y: e.nativeEvent.offsetY,
-					})
-			);
-		},
-		[setPosition]
-	);
+	const handleMouseMove = React.useCallback((e) => {
+		setPosition(
+			(position) =>
+				(position = {
+					x: e.nativeEvent.offsetX,
+					y: e.nativeEvent.offsetY,
+				})
+		);
+	}, []);
 
 	return (
 		<Fragment>
@@ -199,6 +197,6 @@ const NetworkVisualizer: React.FC = React.memo(() => {
 			</Box>
 		</Fragment>
 	);
-});
+};
 
-export default NetworkVisualizer;
+export default React.memo(NetworkVisualizer);

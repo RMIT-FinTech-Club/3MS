@@ -135,4 +135,4 @@ const NetworkToolbar = () => {
 	);
 };
 
-export default NetworkToolbar;
+export default React.memo(NetworkToolbar);

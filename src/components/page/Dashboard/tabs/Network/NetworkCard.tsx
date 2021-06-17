@@ -67,4 +67,4 @@ const NetworkCard = (props: MSNetwork) => {
 	);
 };
 
-export default NetworkCard;
+export default React.memo(NetworkCard);

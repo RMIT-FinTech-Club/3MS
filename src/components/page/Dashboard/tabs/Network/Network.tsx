@@ -40,7 +40,7 @@ let NetworkContext = React.createContext<{
 	setNetworkState: null,
 });
 
-const NetworkCenter = (props: Props) => {
+const NetworkCenter = () => {
 	let { networkId } = useParams<{ networkId: string }>();
 	let [networkState, setNetworkState] = React.useState<NetworkState>({
 		toolId: 1,

@@ -8,6 +8,10 @@ import { ReactQueryDevtools } from "react-query/devtools";
 
 const queryClient = new QueryClient();
 
+// let queue: any = [];
+// sendProfileQueue every 5 seconds
+// setInterval(sendProfileQueue, 5000);
+
 const onRenderCallback = (
 	id, // the "id" prop of the Profiler tree that has just committed
 	phase, // either "mount" (if the tree just mounted) or "update" (if it re-rendered)
@@ -16,10 +20,19 @@ const onRenderCallback = (
 	startTime, // when React began rendering this update
 	commitTime, // when React committed this update
 	interactions // the Set of interactions belonging to this update
-) => {
-	// console.log("[PROFILER - COMMIT TIME]", commitTime);
-	// console.log("[PROFILER - START TIME]", startTime);
-};
+) => {};
+
+// function sendProfileQueue() {
+// 	if (!queue.length) {
+// 		return Promise.resolve();
+// 	}
+// 	const queueToSend = [...queue];
+// 	queue = [];
+// 	// here's where we'd actually make the server call to send the queueToSend
+// 	// data to our backend...
+// 	console.info("sending profile queue", queueToSend);
+// 	return Promise.resolve();
+// }
 
 ReactDOM.render(
 	<React.StrictMode>

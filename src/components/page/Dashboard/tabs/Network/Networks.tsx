@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Profiler } from "react";
 import { Box, Center, Divider, Text } from "@chakra-ui/layout";
 import { Flex, Spacer } from "@chakra-ui/react";
 import NetworkCard from "./NetworkCard";
@@ -7,6 +7,13 @@ import NetworkCreation from "./NetworkCreation";
 import { getNetworks } from "../../../../../core/api/networks";
 import { useQuery } from "react-query";
 import ReusableSpinner from "../../../../ReusableSpinner";
+
+let onRenderCallback = (
+	id, // the "id" prop of the Profiler tree that has just committed
+	actualDuration // time spent rendering the committed update
+) => {
+	console.log(id + "re-render : " + actualDuration);
+};
 
 const NetworksCenter: React.FC = () => {
 	let query = useQuery("networks", async () => await getNetworks(), {
@@ -38,9 +45,11 @@ const NetworksCenter: React.FC = () => {
 				spacing={2}
 			>
 				{query?.data?.map((p) => (
-					<Box>
-						<NetworkCard {...p} />
-					</Box>
+					<Profiler id={p.network_id} onRender={onRenderCallback}>
+						<Box>
+							<NetworkCard {...p} />
+						</Box>
+					</Profiler>
 				))}
 			</SimpleGrid>
 		</Box>
