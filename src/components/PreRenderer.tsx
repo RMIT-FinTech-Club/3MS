@@ -28,7 +28,7 @@ const PreRenderer: React.FC<Props> = (props) => {
 			}
 		};
 		fetch();
-	}, []);
+	}, [globalStore, props.fetchedData]);
 
 	return props.component();
 };

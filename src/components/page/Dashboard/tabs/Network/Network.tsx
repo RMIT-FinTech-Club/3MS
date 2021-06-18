@@ -1,24 +1,24 @@
-import React, { Provider } from "react";
-import { useParams } from "react-router-dom";
-import { getNetwork } from "../../../../../core/api/networks";
-import NetworkToolbar from "./NetworkToolbar";
-import { useQuery } from "react-query";
-import { MappedMSDistributor, MSNetwork } from "../../../../../global-types";
-import NetworkVisualizer from "./NetworkVisualizer";
 import {
-	Grid,
-	GridItem,
-	Flex,
-	Spacer,
+	Badge,
 	Box,
 	Center,
-	Text,
-	Badge,
 	Divider,
+	Flex,
+	Grid,
+	GridItem,
 	Img,
+	Spacer,
+	Text,
 } from "@chakra-ui/react";
+import React from "react";
+import { useQuery } from "react-query";
+import { useParams } from "react-router-dom";
 import { getIntegrations } from "../../../../../core/api/integrations";
+import { getNetwork } from "../../../../../core/api/networks";
+import { MappedMSDistributor, MSNetwork } from "../../../../../global-types";
 import NetworkChart from "./NetworkChart";
+import NetworkToolbar from "./NetworkToolbar";
+import NetworkVisualizer from "./NetworkVisualizer";
 
 interface Props {}
 
@@ -57,9 +57,12 @@ const NetworkCenter = () => {
 	return (
 		<NetworkContext.Provider
 			value={{
-				network: React.useMemo(() => networkQuery.data?.[0], networkQuery.data),
+				network: React.useMemo(
+					() => networkQuery.data?.[0],
+					[networkQuery.data]
+				),
 				networkState,
-				setNetworkState: React.useCallback(setNetworkState, [networkState]),
+				setNetworkState: React.useCallback(setNetworkState, [setNetworkState]),
 			}}
 		>
 			<NetworkToolbar />

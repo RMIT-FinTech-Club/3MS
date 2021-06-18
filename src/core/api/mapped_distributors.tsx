@@ -35,6 +35,8 @@ const addMappedDistributor = async (
 	let parent = await getMappedDistributors({
 		distributor_id: dto.parent,
 	});
+
+	console.log(parent);
 };
 
 export { addMappedDistributor, getMappedDistributors };
