@@ -1,7 +1,6 @@
 import React from "react";
 import useDashboardStore from "../../../core/store/useDashboardStore";
 import { ContactCenter } from "./tabs/Contact/Contact";
-import { DashboardCenter } from "./tabs/Dashboard/Dashboard";
 import { IntegrationsCenter } from "./tabs/Integrations/Integrations";
 import { NetworkCenter } from "./tabs/Network/Network";
 import { NetworksCenter } from "./tabs/Network/Networks";
@@ -14,7 +13,7 @@ const CenterArea = (props: Props) => {
 	let route = useDashboardStore((state) => state.tab);
 	switch (route) {
 		case TABS.DASHBOARD:
-			return <DashboardCenter />;
+			return <NetworksCenter />;
 		case TABS.NETWORK:
 			return <NetworkCenter />;
 		case TABS.NETWORKS:

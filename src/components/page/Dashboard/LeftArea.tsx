@@ -38,7 +38,7 @@ const LeftArea = (props: Props) => {
 				onClick={props.onToggle}
 			/>
 			<Divider />
-			<IconButton
+			{/*<IconButton
 				aria-label="Search database"
 				bg={tabSelected === TABS.DASHBOARD ? "twitter.100" : "transparent"}
 				icon={
@@ -54,7 +54,7 @@ const LeftArea = (props: Props) => {
 					</Fragment>
 				}
 				onClick={() => handleSwitchTab(TABS.DASHBOARD)}
-			/>
+			/>*/}
 			<IconButton
 				aria-label="Search database"
 				bg={tabSelected === TABS.NETWORKS ? "twitter.100" : "transparent"}
@@ -72,7 +72,7 @@ const LeftArea = (props: Props) => {
 				}
 				onClick={() => handleSwitchTab(TABS.NETWORKS)}
 			/>
-			<IconButton
+			{/*<IconButton
 				aria-label="Search database"
 				bg={tabSelected === TABS.STATISTICS ? "twitter.100" : "transparent"}
 				icon={
@@ -88,8 +88,8 @@ const LeftArea = (props: Props) => {
 					</Fragment>
 				}
 				onClick={() => handleSwitchTab(TABS.STATISTICS)}
-			/>
-			<IconButton
+			/>*/}
+			{/*<IconButton
 				aria-label="Search database"
 				bg={tabSelected === TABS.CONTACT ? "twitter.100" : "transparent"}
 				icon={
@@ -105,7 +105,7 @@ const LeftArea = (props: Props) => {
 					</Fragment>
 				}
 				onClick={() => handleSwitchTab(TABS.CONTACT)}
-			/>
+			/>*/}
 			<IconButton
 				aria-label="Search database"
 				bg={tabSelected === TABS.INTEGRATIONS ? "twitter.100" : "transparent"}

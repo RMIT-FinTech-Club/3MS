@@ -62,16 +62,16 @@ const NetworkVisualizer: React.FC = () => {
 	let sample = {
 		nodes: [],
 		edges: [
-			// {
-			// 	source: 1,
-			// 	target: 2,
-			// 	type: "emptyEdge",
-			// },
-			// {
-			// 	source: 2,
-			// 	target: 3,
-			// 	type: "emptyEdge",
-			// },
+			 {
+			 	source: 1,
+			 	target: 2,
+			 	type: "emptyEdge",
+			 },
+			 {
+			 	source: 2,
+			 	target: 3,
+			 	type: "emptyEdge",
+			 },
 		],
 	};
 	const graphViewContainer = React.useRef(null);

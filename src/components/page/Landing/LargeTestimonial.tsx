@@ -14,10 +14,7 @@ export default function LargeTestimonial() {
 				textAlign={"center"}
 				maxW={"3xl"}
 			>
-				We had an incredible experience working with Chakra Templates and were
-				impressed they made such a big difference in only three weeks. Our team
-				is so grateful for the wonderful improvements they made and their
-				ability to get familiar with the product concept so quickly.
+				The 3ML management system is very clean and user-friendly, anyone can use it. Also the system has a helpful user manual that I can easily follow.
 			</Text>
 			<Box textAlign={"center"}>
 				<Avatar

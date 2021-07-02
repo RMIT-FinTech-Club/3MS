@@ -54,14 +54,8 @@ export default function Pricing() {
 							Hobby
 						</Text>
 						<HStack justifyContent="center">
-							<Text fontSize="3xl" fontWeight="600">
-								$
-							</Text>
 							<Text fontSize="5xl" fontWeight="900">
-								79
-							</Text>
-							<Text fontSize="3xl" color="gray.500">
-								/month
+								Free
 							</Text>
 						</HStack>
 					</Box>
@@ -122,7 +116,7 @@ export default function Pricing() {
 									$
 								</Text>
 								<Text fontSize="5xl" fontWeight="900">
-									149
+									99
 								</Text>
 								<Text fontSize="3xl" color="gray.500">
 									/month
@@ -174,7 +168,7 @@ export default function Pricing() {
 								$
 							</Text>
 							<Text fontSize="5xl" fontWeight="900">
-								349
+								149
 							</Text>
 							<Text fontSize="3xl" color="gray.500">
 								/month

@@ -14,7 +14,7 @@ const RightArea = (props: Props) => {
 	let route = useDashboardStore((state) => state.tab);
 	switch (route) {
 		case TABS.DASHBOARD:
-			return <DashboardRight />;
+			return <NetworksRight />;
 		case TABS.NETWORKS:
 			return <NetworksRight />;
 		case TABS.NETWORK:

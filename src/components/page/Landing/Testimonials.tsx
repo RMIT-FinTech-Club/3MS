@@ -103,10 +103,9 @@ export default function Testimonials() {
 				>
 					<Testimonial>
 						<TestimonialContent>
-							<TestimonialHeading>Efficient Collaborating</TestimonialHeading>
+							<TestimonialHeading>Stable software with reasonable price:</TestimonialHeading>
 							<TestimonialText>
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor
-								neque sed imperdiet nibh lectus feugiat nunc sem.
+							: I feel 3M have strong experience in MLM business plan. After understanding their expertise in MLM, I had decided to purchase their premium package. I have been using 3ML premium for more than 2 months now. I feel software is hassle free so far. 
 							</TestimonialText>
 						</TestimonialContent>
 						<TestimonialAvatar
@@ -119,10 +118,9 @@ export default function Testimonials() {
 					</Testimonial>
 					<Testimonial>
 						<TestimonialContent>
-							<TestimonialHeading>Intuitive Design</TestimonialHeading>
+							<TestimonialHeading>Fast, Reliable & Innovative Software</TestimonialHeading>
 							<TestimonialText>
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor
-								neque sed imperdiet nibh lectus feugiat nunc sem.
+							Great functionality. Great User Interface. Fast response with timelines met. Great Customer Service Experience and Communication!
 							</TestimonialText>
 						</TestimonialContent>
 						<TestimonialAvatar
@@ -135,10 +133,9 @@ export default function Testimonials() {
 					</Testimonial>
 					<Testimonial>
 						<TestimonialContent>
-							<TestimonialHeading>Mindblowing Service</TestimonialHeading>
+							<TestimonialHeading>Great MLM System</TestimonialHeading>
 							<TestimonialText>
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor
-								neque sed imperdiet nibh lectus feugiat nunc sem.
+							3ML Software is one of the greatest MLM software that i ever used. I like 3ML Services . Very easy to use, and have a very good design. I would strongly suggest that people try this Software
 							</TestimonialText>
 						</TestimonialContent>
 						<TestimonialAvatar
